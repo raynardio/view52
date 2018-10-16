@@ -10,6 +10,21 @@
  * files in this directory. Styles in this file should be added after the last require_* statement.
  * It is generally better to create a new file per style scope.
  *
+ *= require bootstrap/dist/css/bootstrap
+ *= require PACE/themes/blue/pace-theme-minimal
+ *= require perfect-scrollbar/css/perfect-scrollbar.min
+ *= require bower-jvectormap/jquery-jvectormap-1.2.2
+ *= require nvd3/build/nv.d3.min
+ *= require rickshaw/rickshaw.min
+ *= require fullcalendar/dist/fullcalendar.min
+ *= require bootstrap-daterangepicker/daterangepicker
+ *= require bootstrap-datepicker/dist/css/bootstrap-datepicker3
+ *= require datatables/media/css/jquery.dataTables
+ *= require summernote/dist/summernote
+ *= require selectize/dist/css/selectize.default
+ *= require photoswipe/dist/photoswipe
+ *= require photoswipe/dist/default-skin/default-skin
+ *= require nouislider/distribute/nouislider.min
  *= require_tree .
  *= require_self
  */
