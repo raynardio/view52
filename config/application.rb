@@ -16,5 +16,6 @@ module View52Web
     # -- all .rb files in that directory are automatically loaded after loading
     # the framework and any gems in your application.
     # config.assets.paths << Rails.root.join('app', 'bower_components')
+    default_url_options[:host] = 'dev.view52.com'
   end
 end

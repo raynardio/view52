@@ -1,0 +1,22 @@
+.sign-up, .sign-in {
+  form {
+    margin: 0 auto;
+    max-width: 40ch;
+  }
+
+  .form-group {
+    margin-bottom: 0.5em;
+  }
+
+  .actions {
+    margin-top: 1em;
+  }
+
+  li {
+    list-style: none;
+  }
+
+  #error_explanation {
+    margin-bottom: 1em;
+  }
+}
