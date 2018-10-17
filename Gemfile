@@ -40,6 +40,8 @@ gem 'bower-rails', '~> 0.11.0'
 
 gem 'sprockets-rails', '~> 3.2.1'
 
+gem 'devise'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
