@@ -32,6 +32,7 @@
 #  confirmed_at           :datetime
 #  confirmation_sent_at   :datetime
 #  unconfirmed_email      :string
+#  onboarded_at           :datetime
 #
 
 require 'test_helper'

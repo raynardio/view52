@@ -1,1 +1,5 @@
-<h1 class="text-center">Dashboard!</h1>
+<div id="dashboard">
+  <% unless current_user.onboarded? %>
+    <%= render partial: '/onboarding_wizard' %>
+  <% end %>
+</div>

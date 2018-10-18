@@ -308,4 +308,9 @@ iframe {
 	}
 }
 
-
+.mobile-hide {
+  @media screen
+    and (max-width: 540px) {
+    display: none;
+  }
+}

@@ -3,13 +3,13 @@
 (function ($) {
 	'use strict';
 
-	var $validator = $("#shipping-form").validate({
+	var $validator = $("#onboarding-form").validate({
 	    rules: {
-	        firstName: {
+	        first_name: {
 		        required: true,
 		        minlength: 3
 		    },
-		    lastName: {
+		    last_name: {
 		        required: true,
 		        minlength: 3
 		    },
@@ -18,42 +18,24 @@
 		        minlength: 3,
 		        email: true
 		    },
-		    address: {
-		    	required: true
-		    },
 		    state: {
 		    	required: true
-		    },	
-		    city: {
+		    },
+            country: {
+                required: true
+            },
+            city: {
 		    	required: true
 		    },
-		    postcode: {
+		    zip: {
 		    	required: true,
 		    	minlength: 3
-		    },
-		    creditCard: {
-		    	required: true,
-		    	minlength: 12,
-		    	maxlength: 12
-		    },
-		    cvv: {
-		    	required: true,
-		    	minlength: 3,
-		    	maxlength: 3
-		    },
-		    mmyy: {
-		    	required: true,
-		    	minlength: 4,
-		    	maxlength: 4
-		    },
-		    cardName: {
-		    	required: true
 		    }
 	    }
 	});
 
 	function validationChecking() {
-	    var $valid = $('#shipping-form').valid();
+	    var $valid = $('#onboarding-form').valid();
 	    if (!$valid) {
 	        $validator.focusInvalid();
 	        return false;

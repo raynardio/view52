@@ -32,6 +32,7 @@
 #  confirmed_at           :datetime
 #  confirmation_sent_at   :datetime
 #  unconfirmed_email      :string
+#  onboarded_at           :datetime
 #
 
 class User < ApplicationRecord
@@ -46,5 +47,9 @@ class User < ApplicationRecord
 
   def full_name
     "#{first_name} #{last_name}"
+  end
+
+  def onboarded?
+    onboarded_at.present?
   end
 end
