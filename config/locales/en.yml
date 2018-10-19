@@ -19,3 +19,4 @@ en:
   state: "State"
   select_country: "Select Country"
   select_state: "Select State"
+  get_started_now_bang: "Get Started Now!"

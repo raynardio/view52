@@ -1,5 +1,55 @@
 <div id="dashboard">
   <% unless current_user.onboarded? %>
-    <%= render partial: '/onboarding_wizard' %>
+    <div class="text-center">
+      <button id="get-started-button" class="btn btn-primary"><%= t :get_started_now_bang %></button>
+    </div>
+
+    <div id="onboarding" style="display: none">
+      <%= render partial: '/onboarding_wizard' %>
+    </div>
   <% end %>
 </div>
+
+<%= content_for :footer do %>
+  <script>
+    $(() => {
+        const $get_started_button = $('#get-started-button');
+        const $onboarding = $('#onboarding');
+        const $button_next = $('.button-next');
+
+        $get_started_button.click(() => {
+            $get_started_button.hide();
+            $onboarding.show();
+        });
+
+        // TODO: Not sure why this gets disabled after displaying content
+        $button_next.removeClass('disabled');
+
+        $button_next.click(() => {
+            $.ajax({
+                url: '<%= user_registration_url %>',
+                method: 'PUT',
+                dataType: 'json',
+                beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
+                data: {
+                  user: {
+                    first_name: $('input[name=first_name]').val(),
+                    last_name: $('input[name=last_name]').val(),
+                    country: $('select[name=country]').val(),
+                    city: $('input[name=city]').val(),
+                    state: $('select[name=state]').val(),
+                    zip: $('input[name=zip]').val(),
+                  }
+                },
+                success: (xhr, res) => {
+                    console.log(`Success: ${res}`);
+                },
+                error: (xhr, err) => {
+                    console.error(`Error: ${err}`);
+                }
+            });
+            return false;
+        });
+    });
+  </script>
+<% end %>
