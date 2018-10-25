@@ -8,30 +8,30 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
     <div class="app">
       <div class="layout">
         <% if user_signed_in? %>
-          <%= render partial: 'dashboard/left_nav' %>
+          <%= render partial: 'layouts/left_nav' %>
         <% end %>
         <!-- Page Container START -->
         <div class="page-container">
 
           <% if user_signed_in? %>
-            <%= render partial: 'dashboard/header' %>
-            <%= render partial: 'dashboard/right_nav' %>
-            <%#= render partial: 'dashboard/theme_config' %>
+            <%= render partial: 'layouts/header' %>
+            <%= render partial: 'layouts/right_nav' %>
           <% end %>
 
           <!-- Content Wrapper START -->
           <div class="main-content">
             <div class="container-fluid">
-              <%# if flash[:notice] %>
-<!--                <div class="notice text-center"><%#= flash[:notice] %></div>-->
-              <%# end %>
+              <% if flash[:notice] %>
+                <div class="notice text-center"><%= flash[:notice] %></div>
+              <% end %>
 
               <% if flash[:alert] %>
                 <div class="alert alert-danger text-center"><%= flash[:alert] %></div>
@@ -48,9 +48,9 @@
               <div class="copyright">
                 <span>Copyright © 2018 <b class="text-dark">View52</b>. All rights reserved.</span>
                 <span class="go-right">
-                                  <a href="" class="text-gray mrg-right-15">Term &amp; Conditions</a>
-                                  <a href="" class="text-gray">Privacy &amp; Policy</a>
-                              </span>
+                  <a href="" class="text-gray mrg-right-15">Term &amp; Conditions</a>
+                  <a href="" class="text-gray">Privacy &amp; Policy</a>
+                </span>
               </div>
             </div>
           </footer>
@@ -62,7 +62,8 @@
       </div>
     </div>
 
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag :app %>
+    <%= javascript_include_tag params[:controller] %>
     <%= yield :footer %>
   </body>
 </html>

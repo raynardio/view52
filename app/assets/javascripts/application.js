@@ -20,7 +20,7 @@
 //= require perfect-scrollbar/js/perfect-scrollbar
 //= require bower-jvectormap/jquery-jvectormap-1.2.2.min
 //= require bower-jvectormap/jquery-jvectormap-world-mill-en
-//= require maps/jquery-jvectormap-us-aea
+//=// require maps/jquery-jvectormap-us-aea
 //= require d3/d3
 //= require jquery.sparkline/index
 //= require chart.js/dist/Chart
@@ -50,4 +50,4 @@
 //= require perfect-scrollbar/js/perfect-scrollbar.jquery
 
 
-//= require_tree .
+//=// require_tree .

@@ -20,3 +20,6 @@ en:
   select_country: "Select Country"
   select_state: "Select State"
   get_started_now_bang: "Get Started Now!"
+  confirmation: "Confirmation"
+  previous: "Previous"
+  next: "Next"

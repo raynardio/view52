@@ -1,8 +1,4 @@
-// Main JavaScripts
-
-(function ($) {
-	'use strict';
-	
+$(() => {
 	// Side Nav
 	function sideNav() {
 		$('.side-nav .side-nav-menu li a').on('click', function(e) {
@@ -37,15 +33,7 @@
 	        $('.side-panel').toggleClass("side-panel-open");
 	        e.preventDefault();
 	    });
-	}	
-
-	// Chat Toggle
-	function chatToggle() {
-		$('.chat-toggle').on('click', function(e) {
-	        $('.chat').toggleClass("open");
-	        e.preventDefault();
-	    });
-	}	
+	}
 
 	// Todo Toggle
 	function todoToggle() {
@@ -53,7 +41,7 @@
 	        $('.todo-wrapper').toggleClass("open");
 	        e.preventDefault();
 	    });
-	}	
+	}
 
 	// Search Toggle 
 	function searchToggle() {
@@ -75,15 +63,7 @@
 		    }
 		    $('.serach-text-bind').html($(this).val());
 		})	
-	} 
-
-	// Theme Configurator
-	function themeConfig() {
-		$('.theme-toggle, .config-close').on('click', function(e) {
-	        $('.theme-configurator').toggleClass("theme-config-open");
-	        e.preventDefault();
-	    });
-	}	
+	}
 
 	// Perfect Scroll Bar
 	function perfectSB() {
@@ -116,68 +96,15 @@
 		});
 	}
 
-	//Theme Config 
-	function themeColorConfig() {
-
-		$(".header-default input").change(function() {
-            $('.app').removeClass("header-primary header-info header-success header-danger header-dark");
-		})
-
-		$(".header-info input").change(function() {
-		    $('.app').addClass("header-info")
-            $('.app').removeClass("header-primary header-success header-danger header-dark");
-		});
-
-		$(".header-primary input").change(function() {
-		    $('.app').addClass("header-primary")
-            $('.app').removeClass("header-info header-success header-danger header-dark");
-		});
-
-		$(".header-success input").change(function() {
-		    $('.app').addClass("header-success")
-            $('.app').removeClass("header-info header-primary header-danger header-dark");
-		});
-
-		$(".header-danger input").change(function() {
-		    $('.app').addClass("header-danger")
-            $('.app').removeClass("header-info header-primary header-success header-dark");
-		});
-
-		$(".header-dark input").change(function() {
-		    $('.app').addClass("header-dark")
-            $('.app').removeClass("header-info header-primary header-success header-danger");
-		});
-
-		$(".theme-colors.side-nav-dark input").change(function() {
-		    $('.app').addClass("side-nav-dark")
-            $('.app').removeClass("side-nav-default");
-		});
-
-		$(".theme-colors.sidenav-default input").change(function() {
-		    $('.app').addClass("side-nav-default")
-            $('.app').removeClass("side-nav-dark");
-		});
-
-		$('#rtl-toogle').on('click', function(e) {
-	        $('.app').toggleClass("rtl");
-	        e.preventDefault();
-	    });
-	}	
-
-
-
 	function init() {
 	    sideNav();
 	    sideNavToggle();
 	    sidePanelToggle();
-	    chatToggle();
 	    todoToggle();
 	    searchToggle();
 	    advanceSearch();
-	    themeConfig();
 	    perfectSB();
 	    cardPortletCtrl();
-	    themeColorConfig();
 	}
 	init();
-})(jQuery);
+});

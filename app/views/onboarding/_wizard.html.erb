@@ -1,0 +1,65 @@
+<div class="page-title text-center">
+  <h1><%= t :get_started %></h1>
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-block">
+        <div class="row relative">
+          <div id="onboarding-wizard" class="form-wizard col-md-10 ml-auto mr-auto">
+            <ul class="nav nav-pills nav-fill">
+              <li class="nav-item">
+                <a href="#step1" data-toggle="tab">
+                  <span class="step">1</span>
+                  <span class="title mobile-hide"><%= t :profile %></span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="#step2" data-toggle="tab">
+                  <span class="step">2</span>
+                  <span class="title mobile-hide"><%= t :roles_and_values %></span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="#step3" data-toggle="tab">
+                  <span class="step">3</span>
+                  <span class="title mobile-hide"><%= t :goals %></span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="#step4" data-toggle="tab">
+                  <span class="step">4</span>
+                  <span class="title mobile-hide"><%= t :confirmation %></span>
+                </a>
+              </li>
+            </ul>
+            <div id="bar" class="progress progress-info" style="width: 75%">
+              <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"></div>
+            </div>
+            <div class="tab-content">
+              <div id="step1" class="tab-pane fade in active">
+                <%= render partial: 'onboarding/step1' %>
+              </div>
+              <div id="step2" class="tab-pane fade">
+              </div>
+              <div id="step3" class="tab-pane fade">
+              </div>
+              <div id="step4" class="tab-pane fade">
+              </div>
+              <div class="wizard-pager">
+                <div class="">
+                  <button type="button" class="btn btn-default button-previous btn-rounded"><%= t :previous %></button>
+                  <button type="button" class="btn btn-primary button-next pull-right btn-rounded"><%= t :next %></button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%= content_for :footer do %>
+  <%= javascript_include_tag 'onboarding_wizard', 'data-post-url': "#{user_registration_path}" %>
+<% end %>

@@ -1,0 +1,66 @@
+<form id="step1-form" class="width-100" method="get">
+  <div class="row">
+    <div class="col-md-10 mr-auto ml-auto">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label><%= t :first_name %></label>
+            <input type="text" class="form-control" name="first_name" value="<%= current_user.first_name %>">
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label><%= t :last_name %></label>
+            <input type="text" class="form-control" name="last_name" value="<%= current_user.last_name %>">
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="form-group">
+            <label><%= t :email %></label>
+            <input type="email" class="form-control" name="email" value="<%= current_user.email %>">
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="form-group">
+            <label><%= t :country %></label>
+            <select class="custom-select" name="country">
+              <option disabled <%= 'selected' unless current_user.country %>><%= t :select_country %></option>
+              <% Locale::COUNTRIES.each do |country| %>
+                <option value="<%=  country  %>" <%= 'selected' if current_user.country == country %>><%= country %></option>
+              <%  end %>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+          <div class="form-group">
+            <label><%= t :city %></label>
+            <input type="text" class="form-control" name="city" value="<%= current_user.city %>">
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="form-group">
+            <label><%= t :state %></label>
+            <select class="custom-select" name="state">
+              <option disabled <%= 'selected' unless current_user.state %>><%= t :select_state %></option>
+              <% Locale::STATES.each do |state, abbr| %>
+                <option value="<%=  abbr  %>" <%= 'selected' if current_user.state == abbr %>><%= state %></option>
+              <%  end %>
+            </select>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="form-group">
+            <label><%= t :zip_code %></label>
+            <input type="text" class="form-control" name="zip" value="<%= current_user.zip %>">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
