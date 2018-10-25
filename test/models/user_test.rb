@@ -33,6 +33,7 @@
 #  confirmation_sent_at   :datetime
 #  unconfirmed_email      :string
 #  onboarded_at           :datetime
+#  date_of_birth          :date
 #
 
 require 'test_helper'

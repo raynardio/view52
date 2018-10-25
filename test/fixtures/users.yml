@@ -33,6 +33,7 @@
 #  confirmation_sent_at   :datetime
 #  unconfirmed_email      :string
 #  onboarded_at           :datetime
+#  date_of_birth          :date
 #
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html

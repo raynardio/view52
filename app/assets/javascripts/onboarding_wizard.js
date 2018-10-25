@@ -73,7 +73,10 @@ $(() => {
           country: $('select[name=country]').val(),
           city: $('input[name=city]').val(),
           state: $('select[name=state]').val(),
-          zip: $('input[name=zip]').val()
+          zip: $('input[name=zip]').val(),
+          sex: $('select[name=sex]').val(),
+          date_of_birth: $('input[name=date_of_birth]').val(),
+          marital_status: $('select[name=marital_status]').val()
         }
       };
       $step.html($loadingSpinner);
@@ -106,4 +109,16 @@ $(() => {
   });
 
   $('.button-next').removeClass('disabled');
+
+  $('input[name=date_of_birth]').fullCalendar({
+    header: { center: 'month,year' },
+    views: {
+      month: {
+        titleFormat: 'YYYY-MM-DD'
+      }
+    }
+  });
+
+  $('select').selectize({
+  });
 });

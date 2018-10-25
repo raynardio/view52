@@ -16,6 +16,34 @@
         </div>
       </div>
       <div class="row">
+        <div class="col-md-4">
+          <div class="form-group">
+            <label><%= t :sex %></label>
+            <select name="sex" class="selectize-control">
+              <% User::GENDERS.each do |sex| %>
+                <option value="<%= sex %>" <%= 'selected' if current_user.sex == sex %>><%= t sex %></option>
+              <% end %>
+            </select>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="form-group">
+            <label><%= t :marital_status %></label>
+            <select name="marital_status" class="selectize-control">
+            <% User::MARITAL_STATUSES.each do |status| %>
+              <option value="<%= status %>" <%= 'selected' if current_user.marital_status == status %>><%= t status %></option>
+            <% end %>
+            </select>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="form-group">
+            <label><%= t :date_of_birth %></label>
+            <input type="text" class="form-control datepicker-orient-top" name="date_of_birth" value="<%= current_user.formatted_dob %>" data-provide="datepicker">
+          </div>
+        </div>
+      </div>
+      <div class="row">
         <div class="col-md-12">
           <div class="form-group">
             <label><%= t :email %></label>
@@ -27,7 +55,7 @@
         <div class="col-md-12">
           <div class="form-group">
             <label><%= t :country %></label>
-            <select class="custom-select" name="country">
+            <select class="selectize-control" name="country">
               <option disabled <%= 'selected' unless current_user.country %>><%= t :select_country %></option>
               <% Locale::COUNTRIES.each do |country| %>
                 <option value="<%=  country  %>" <%= 'selected' if current_user.country == country %>><%= country %></option>
@@ -46,7 +74,7 @@
         <div class="col-md-4">
           <div class="form-group">
             <label><%= t :state %></label>
-            <select class="custom-select" name="state">
+            <select class="selectize-control" name="state">
               <option disabled <%= 'selected' unless current_user.state %>><%= t :select_state %></option>
               <% Locale::STATES.each do |state, abbr| %>
                 <option value="<%=  abbr  %>" <%= 'selected' if current_user.state == abbr %>><%= state %></option>

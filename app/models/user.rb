@@ -33,9 +33,20 @@
 #  confirmation_sent_at   :datetime
 #  unconfirmed_email      :string
 #  onboarded_at           :datetime
+#  date_of_birth          :date
 #
 
 class User < ApplicationRecord
+  GENDERS = %w(male female prefer_not_to_say)
+  MARITAL_STATUSES = %w(single married divorced prefer_not_to_say)
+  EDUCATION_LEVELS = %w(middle_school high_school undergraduate graduate)
+  WEEKLY_WORK_HOURS = %w(20 30 40)
+  NIGHTLY_SLEEP = %w(5 6 7 8)
+  COMMUTE_HOURS = %w(.5 1 2 3)
+  EXERCISE_HOURS = %w(.25 .5 .75 1)
+  DIET = %w(:omnivore :vegetarian :pescitarian :vegan)
+
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,
          :trackable #, :confirmable
@@ -51,5 +62,9 @@ class User < ApplicationRecord
 
   def onboarded?
     onboarded_at.present?
+  end
+
+  def formatted_dob
+    date_of_birth.strftime('%Y-%m-%d') rescue ''
   end
 end

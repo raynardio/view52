@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class User::RegistrationsController < Devise::RegistrationsController
+  ALLOWED_FIELDS = %w(first_name last_name email country city state zip sex date_of_birth marital_status)
+
   before_action :configure_sign_up_params, only: [:create]
   before_action :configure_account_update_params, only: [:update]
 
@@ -21,7 +23,6 @@ class User::RegistrationsController < Devise::RegistrationsController
 
   # PUT /resource
   def update
-    p params
     current_user.update_attributes! update_params
     render json: { msg: 'okay!' }
   end
@@ -43,7 +44,7 @@ class User::RegistrationsController < Devise::RegistrationsController
   protected
 
   def update_params
-    params.require(:user).permit(:first_name, :last_name, :email, :country, :city, :state, :zip)
+    params.require(:user).permit(ALLOWED_FIELDS)
   end
 
   # If you have extra params to permit, append them to the sanitizer.
@@ -53,7 +54,7 @@ class User::RegistrationsController < Devise::RegistrationsController
 
   # If you have extra params to permit, append them to the sanitizer.
   def configure_account_update_params
-    devise_parameter_sanitizer.permit(:account_update, keys: [:first_name, :last_name, :email, :country, :city, :state, :zip])
+    devise_parameter_sanitizer.permit(:account_update, keys: ALLOWED_FIELDS)
   end
 
   # The path used after sign up.
