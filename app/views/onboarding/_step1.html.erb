@@ -16,34 +16,6 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-md-4">
-          <div class="form-group">
-            <label><%= t :sex %></label>
-            <select name="sex" class="selectize-control">
-              <% User::GENDERS.each do |sex| %>
-                <option value="<%= sex %>" <%= 'selected' if current_user.sex == sex %>><%= t sex %></option>
-              <% end %>
-            </select>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="form-group">
-            <label><%= t :marital_status %></label>
-            <select name="marital_status" class="selectize-control">
-            <% User::MARITAL_STATUSES.each do |status| %>
-              <option value="<%= status %>" <%= 'selected' if current_user.marital_status == status %>><%= t status %></option>
-            <% end %>
-            </select>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="form-group">
-            <label><%= t :date_of_birth %></label>
-            <input type="text" class="form-control datepicker-orient-top" name="date_of_birth" value="<%= current_user.formatted_dob %>" data-provide="datepicker">
-          </div>
-        </div>
-      </div>
-      <div class="row">
         <div class="col-md-12">
           <div class="form-group">
             <label><%= t :email %></label>
@@ -86,6 +58,98 @@
           <div class="form-group">
             <label><%= t :zip_code %></label>
             <input type="text" class="form-control" name="zip" value="<%= current_user.zip %>">
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+          <div class="form-group">
+            <label><%= t :sex %></label>
+            <select name="sex" class="selectize-control">
+              <% User::GENDERS.each do |sex| %>
+                <option value="<%= sex %>" <%= 'selected' if current_user.sex == sex %>><%= t sex %></option>
+              <% end %>
+            </select>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="form-group">
+            <label><%= t :marital_status %></label>
+            <select name="marital_status" class="selectize-control">
+              <% User::MARITAL_STATUSES.each do |status| %>
+                <option value="<%= status %>" <%= 'selected' if current_user.marital_status == status %>><%= t status %></option>
+              <% end %>
+            </select>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="form-group">
+            <label><%= t :date_of_birth %></label>
+            <input type="text" class="form-control datepicker-orient-top" name="date_of_birth" value="<%= current_user.formatted_dob %>" data-provide="datepicker">
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+          <div class="form-group">
+            <label><%= t :highest_level_of_education %></label>
+            <select name="education">
+              <% User::EDUCATION_LEVELS.each do |level| %>
+                <option value="<%= level %>" <%= 'selected' if current_user.education == level %> ><%= t level %></option>
+              <% end %>
+            </select>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="form-group">
+            <label><%= t :weekly_average_work_hours %></label>
+            <select name="weekly_hours">
+              <% User::WEEKLY_WORK_HOURS.map(&:to_f).each do |hours| %>
+                <option value="<%= hours %>" <%= 'selected' if current_user.weekly_hours == hours %>><%= hours %></option>
+              <% end %>
+            </select>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="form-group">
+            <label><%= t :average_hours_of_sleep_a_night %></label>
+            <select name="sleep_hours">
+              <% User::NIGHTLY_SLEEP.map(&:to_f).each do |hours| %>
+                <option value="<%= hours %>" <%= 'selected' if current_user.sleep_hours == hours %>><%= hours %></option>
+              <% end %>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+          <div class="form-group">
+            <label><%= t :average_daily_hours_commuting_travelling %></label>
+            <select name="commute_hours">
+              <% User::COMMUTE_HOURS.map(&:to_f).each do |hours| %>
+                <option value="<%= hours %>" <%= 'selected' if current_user.commute_hours == hours %>><%= hours %></option>
+            <% end %>
+            </select>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="form-group">
+            <label><%= t :average_daily_hours_exercising %></label>
+            <select name="exercise_hours">
+              <% User::EXERCISE_HOURS.map(&:to_f).each do |hours| %>
+                <option value="<%= hours %>" <%= 'selected' if current_user.exercise_hours == hours %>><%= hours %></option>
+              <% end %>
+            </select>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="form-group">
+            <label><%= t :typical_diet %></label>
+            <select name="diet">
+              <% User::DIET.each do |diet| %>
+                <option value="<%= diet %>" <%= 'selected' if current_user.diet == diet %>><%= t diet %></option>
+              <% end %>
+            </select>
           </div>
         </div>
       </div>

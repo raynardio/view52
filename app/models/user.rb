@@ -34,6 +34,7 @@
 #  unconfirmed_email      :string
 #  onboarded_at           :datetime
 #  date_of_birth          :date
+#  sleep_hours            :float
 #
 
 class User < ApplicationRecord
@@ -44,7 +45,7 @@ class User < ApplicationRecord
   NIGHTLY_SLEEP = %w(5 6 7 8)
   COMMUTE_HOURS = %w(.5 1 2 3)
   EXERCISE_HOURS = %w(.25 .5 .75 1)
-  DIET = %w(:omnivore :vegetarian :pescitarian :vegan)
+  DIET = %w(omnivore vegetarian pescitarian vegan)
 
 
   devise :database_authenticatable, :registerable,

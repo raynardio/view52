@@ -1,7 +1,11 @@
 # frozen_string_literal: true
 
 class User::RegistrationsController < Devise::RegistrationsController
-  ALLOWED_FIELDS = %w(first_name last_name email country city state zip sex date_of_birth marital_status)
+  ALLOWED_FIELDS = %w(first_name last_name email country city
+      state zip sex date_of_birth marital_status education
+      weekly_hours sleep_hours commute_hours exercise_hours diet)
+
+  FLOAT_FIELDS = %w(weekly_hours sleep_hours commute_hours exercise_hours)
 
   before_action :configure_sign_up_params, only: [:create]
   before_action :configure_account_update_params, only: [:update]

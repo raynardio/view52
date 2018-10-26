@@ -76,7 +76,13 @@ $(() => {
           zip: $('input[name=zip]').val(),
           sex: $('select[name=sex]').val(),
           date_of_birth: $('input[name=date_of_birth]').val(),
-          marital_status: $('select[name=marital_status]').val()
+          marital_status: $('select[name=marital_status]').val(),
+          education: $('select[name=education]').val(),
+          weekly_hours: parseFloat($('select[name=weekly_hours]').val()),
+          sleep_hours: parseFloat($('select[name=sleep_hours]').val()),
+          commute_hours: parseFloat($('select[name=commute_hours]').val()),
+          exercise_hours: parseFloat($('select[name=exercise_hours]').val()),
+          diet: $('select[name=diet]').val()
         }
       };
       $step.html($loadingSpinner);

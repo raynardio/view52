@@ -34,6 +34,7 @@
 #  unconfirmed_email      :string
 #  onboarded_at           :datetime
 #  date_of_birth          :date
+#  sleep_hours            :float
 #
 
 require 'test_helper'
