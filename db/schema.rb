@@ -10,7 +10,36 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_26_162439) do
+ActiveRecord::Schema.define(version: 2018_10_26_221013) do
+
+  create_table "role_categories", primary_key: "label", id: :string, force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "roles", primary_key: "label", id: :string, force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "user_role_categories", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.string "role_category_id", null: false
+    t.integer "importance", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id", "role_category_id"], name: "index_user_role_categories_on_user_id_and_role_category_id", unique: true
+    t.index ["user_id"], name: "index_user_role_categories_on_user_id"
+  end
+
+  create_table "user_roles", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.string "role_id", null: false
+    t.string "tense"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["role_id", "user_id"], name: "index_user_roles_on_role_id_and_user_id", unique: true
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", null: false

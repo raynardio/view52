@@ -107,4 +107,12 @@ $(() => {
 	    cardPortletCtrl();
 	}
 	init();
+
+	window.formToJson = $form => {
+	  const params = {};
+	  $form.serializeArray().forEach(param => {
+	    params[param.name] = param.value;
+    });
+	  return params;
+  };
 });

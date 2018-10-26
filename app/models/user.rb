@@ -36,6 +36,12 @@
 #  date_of_birth          :date
 #  sleep_hours            :float
 #
+# Indexes
+#
+#  index_users_on_confirmation_token    (confirmation_token) UNIQUE
+#  index_users_on_email                 (email) UNIQUE
+#  index_users_on_reset_password_token  (reset_password_token) UNIQUE
+#
 
 class User < ApplicationRecord
   GENDERS = %w(male female prefer_not_to_say)
@@ -47,6 +53,11 @@ class User < ApplicationRecord
   EXERCISE_HOURS = %w(.25 .5 .75 1)
   DIET = %w(omnivore vegetarian pescitarian vegan)
 
+  has_many :user_roles
+  alias_attribute :roles, :user_roles
+  has_many :user_role_categories
+  alias_attribute :role_categories, :user_role_categories
+
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,
@@ -56,6 +67,14 @@ class User < ApplicationRecord
   validates :first_name, presence: true
   validates :last_name, presence: true
   validates :encrypted_password, presence: true
+
+  def present_roles
+    roles.includes(:role).where(tense: :present).map &:role
+  end
+
+  def future_roles
+    roles.includes(:role).where(tense: :future).map &:role
+  end
 
   def full_name
     "#{first_name} #{last_name}"

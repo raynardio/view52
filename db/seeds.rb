@@ -5,3 +5,10 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+role_categories =
+    %w(intellectual health vocational avocational
+    spiritual financial social)
+RoleCategory.create!(role_categories.map do |label|
+  { label: label }
+end)

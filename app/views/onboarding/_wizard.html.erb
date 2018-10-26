@@ -41,6 +41,7 @@
                 <%= render partial: 'onboarding/step1' %>
               </div>
               <div id="step2" class="tab-pane fade">
+                <%= render partial: 'onboarding/step2' %>
               </div>
               <div id="step3" class="tab-pane fade">
               </div>
@@ -61,5 +62,5 @@
 </div>
 
 <%= content_for :footer do %>
-  <%= javascript_include_tag 'onboarding_wizard', 'data-post-url': "#{user_registration_path}" %>
+  <%= javascript_include_tag 'onboarding_wizard' %>
 <% end %>
