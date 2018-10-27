@@ -57,7 +57,7 @@ class User < ApplicationRecord
   alias_attribute :roles, :user_roles
   has_many :user_role_categories
   alias_attribute :role_categories, :user_role_categories
-
+  has_many :goals
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,

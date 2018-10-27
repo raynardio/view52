@@ -51,6 +51,21 @@ class User::RegistrationsController < Devise::RegistrationsController
       end
       update_params.delete :role_category
     end
+    if update_params.include? :goal
+      update_params[:goal].each do |term,goals|
+        goals.each do |category,text|
+          next unless text.present?
+          role_category = RoleCategory.find category
+          goal = current_user.goals.find_or_initialize_by term: term, role_category: role_category
+          goal.text = text
+          goal.save!
+        end
+      end
+      # TODO: Handle last step properly
+      update_params.delete :goal
+      current_user.onboarded_at = Time.now
+      current_user.save!
+    end
     current_user.update_attributes! update_params
     render json: { msg: 'okay!' }
   end
@@ -72,7 +87,7 @@ class User::RegistrationsController < Devise::RegistrationsController
   protected
 
   def update_params
-    @update_params ||= params.require(:user).permit(*ALLOWED_FIELDS, { role_category: {} })
+    @update_params ||= params.require(:user).permit(*ALLOWED_FIELDS, { role_category: {}, goal: {} })
   end
 
   # If you have extra params to permit, append them to the sanitizer.

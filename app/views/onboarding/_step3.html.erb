@@ -1,0 +1,12 @@
+<form id="step3-form" class="width-100" data-post-url="<%= user_registration_path %>">
+  <% RoleCategory.all.map(&:label).each do |category| %>
+    <% Goal::TERMS.each do |term| %>
+    <div class="row">
+      <div class="form-group col-md-12">
+        <label><%= t "goal_description.#{term}", category: category.capitalize %></label>
+        <input type="text" class="form-control" name="goal[<%= term %>][<%= category %>]" value="<%= current_user.goals.find_by(term: term, role_category_id: category).text rescue '' %>">
+      </div>
+    </div>
+    <% end %>
+  <% end %>
+</form>

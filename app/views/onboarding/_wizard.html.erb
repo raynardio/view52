@@ -26,14 +26,8 @@
                   <span class="title mobile-hide"><%= t :goals %></span>
                 </a>
               </li>
-              <li class="nav-item">
-                <a href="#step4" data-toggle="tab">
-                  <span class="step">4</span>
-                  <span class="title mobile-hide"><%= t :confirmation %></span>
-                </a>
-              </li>
             </ul>
-            <div id="bar" class="progress progress-info" style="width: 75%">
+            <div id="bar" class="progress progress-info" style="width: 65%">
               <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"></div>
             </div>
             <div class="tab-content">
@@ -44,8 +38,7 @@
                 <%= render partial: 'onboarding/step2' %>
               </div>
               <div id="step3" class="tab-pane fade">
-              </div>
-              <div id="step4" class="tab-pane fade">
+                <%= render partial: 'onboarding/step3' %>
               </div>
               <div class="wizard-pager">
                 <div class="">
