@@ -2,6 +2,8 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+@import 'variables';
+
 form {
   label {
     font-weight: bold;
@@ -11,5 +13,23 @@ form {
   input[type=radio] {
     width: 1.5em;
     height: 1.5em;
+  }
+}
+
+#annual-view {
+  .year {
+    &:hover {
+      background: $default-primary-alpha;
+      cursor: pointer;
+    }
+
+    margin: 0 0.2em 0.2em 0;
+    padding: 0.2em;
+    min-height: 4em;
+    border: 1px solid $default-primary;
+
+    .heading {
+      font-size: 0.8em;
+    }
   }
 }

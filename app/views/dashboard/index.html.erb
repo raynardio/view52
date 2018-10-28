@@ -7,5 +7,7 @@
     <div id="onboarding" style="display: none">
       <%= render partial: 'onboarding/wizard' %>
     </div>
+  <% else %>
+    <%= render partial: 'shared/annual_view' %>
   <% end %>
 </div>

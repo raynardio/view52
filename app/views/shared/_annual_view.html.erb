@@ -1,0 +1,17 @@
+<div id="annual-view">
+  <% @annual_dates.each do |row| %>
+    <div class="row">
+      <% row.each do |date| %>
+        <div class="year col-md-1">
+          <div class="heading">
+            <%= date.strftime '%Y' %> - Age
+            <%= date.year - current_user.date_of_birth.year %>
+          </div>
+          <div class="content">
+            <%= t :you_are_here if @today.year == date.year %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+</div>

@@ -52,3 +52,4 @@ en:
   goal_description:
     short: "%{category} - Short Term Goal (1 Year or Less)"
     long: "%{category} - Long Term Goal (More than 1 Year)"
+  you_are_here: "You Are Here!"
