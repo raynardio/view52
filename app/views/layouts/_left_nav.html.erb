@@ -12,29 +12,70 @@
       </div>
     </div>
     <ul class="side-nav-menu scrollable">
-      <li class="nav-item active">
+      <li class="nav-item">
         <a class="mrg-top-30" href="/">
-                              <span class="icon-holder">
-                                      <i class="ti-home"></i>
-                                  </span>
-          <span class="title">Dashboard</span>
+          <span class="icon-holder">
+            <i class="ti-home"></i>
+          </span>
+          <span class="title"><%= t :dashboard %></span>
         </a>
       </li>
       <li class="nav-item dropdown">
-        <a class="dropdown-toggle" href="javascript:void(0);">
-                              <span class="icon-holder">
-                                      <i class="ti-light-bulb"></i>
-                                  </span>
-          <span class="title"><%= t :intellectual %></span>
+        <a class="dropdown-toggle">
+          <span class="icon-holder">
+            <i class="ti-package"></i>
+          </span>
+          <span class="title"><%= t :views %></span>
           <span class="arrow">
-                                      <i class="ti-angle-right"></i>
-                                  </span>
+           <i class="ti-angle-right"></i>
+          </span>
         </a>
         <ul class="dropdown-menu">
-          <li>
-            <a href="/">Placeholder</a>
-          </li>
+          <% RoleCategory.order(:label).each do |role_category| %>
+            <li>
+                <a>
+                  <span class="icon-holder">
+                    <i class="<%= role_category.icon_class %>"></i>
+                  </span>
+                  <span class="title">
+                    <%= role_category.short_name %>
+                  </span>
+                </a>
+            </li>
+          <% end %>
         </ul>
+      </li>
+      <li class="nav-item">
+        <a href="/">
+          <span class="icon-holder">
+            <i class="ti-palette"></i>
+          </span>
+          <span class="title"><%= t :roles_and_goals %></span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a href="/">
+          <span class="icon-holder">
+            <i class="ti-settings"></i>
+          </span>
+          <span class="title"><%= t :profile_and_settings %></span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a href="/">
+          <span class="icon-holder">
+            <i class="ti-map-alt"></i>
+          </span>
+          <span class="title"><%= t :prototyping %></span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a href="/">
+          <span class="icon-holder">
+            <i class="ti-cloud"></i>
+          </span>
+          <span class="title"><%= t :extra %></span>
+        </a>
       </li>
     </ul>
   </div>

@@ -5,6 +5,7 @@
 #  label      :string           not null, primary key
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  icon_class :string
 #
 
 require 'test_helper'

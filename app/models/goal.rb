@@ -24,4 +24,8 @@ class Goal < ApplicationRecord
 
   belongs_to  :user
   belongs_to :role_category
+
+  def to_s
+    I18n.t("goal_description.#{term}", category: role_category_id.capitalize) + ': ' + text
+  end
 end
