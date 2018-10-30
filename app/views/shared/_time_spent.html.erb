@@ -1,0 +1,29 @@
+<div id="time-spent">
+  <canvas id="time-spent-chart"></canvas>
+</div>
+
+<% content_for :footer do %>
+  <script>
+    $(() => {
+      const $time_spent_chart = $('#time-spent-chart');
+
+      new Chart($time_spent_chart, {
+        type: 'pie',
+        data: {
+          datasets: [{
+            data: <%= @time_spent_values %>,
+            backgroundColor: [
+              'rgba(255, 99, 132)',
+              'rgba(54, 162, 235)',
+              'rgba(255, 206, 86)',
+              'rgba(75, 192, 192)',
+              'rgba(153, 102, 255)'
+            ]
+          }],
+          labels: <%= @time_spent_labels.to_s.html_safe %>
+        },
+
+      });
+    });
+  </script>
+<% end %>

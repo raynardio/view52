@@ -12,7 +12,9 @@
         </div>
       </div>
       <div class="col-md-8">
-        <%= role_category.goals.map(&:text).join ', ' %>
+        <% role_category.goals.map(&:text).each do |goal| %>
+          <span class="label label-default"><%= goal %></span>
+        <% end %>
       </div>
     <% end %>
   </div>
