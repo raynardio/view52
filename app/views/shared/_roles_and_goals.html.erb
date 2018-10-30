@@ -1,7 +1,7 @@
 <div id="goals">
-  <div class="row">
     <% @role_categories.each do |role_category| %>
-      <div class="col-md-4 text-right">
+    <div class="row">
+      <div class="flex-md-column flex-md-nowrap">
         <div class="role-category">
           <a href="<%= role_path role_category.role_category_id %>">
             <span class="icon-holder">
@@ -11,11 +11,11 @@
           </a>
         </div>
       </div>
-      <div class="col-md-8">
+      <div class="flex-md-column">
         <% role_category.goals.map(&:text).each do |goal| %>
           <span class="label label-default"><%= goal %></span>
         <% end %>
       </div>
+    </div>
     <% end %>
-  </div>
 </div>
