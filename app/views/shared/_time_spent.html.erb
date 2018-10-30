@@ -1,5 +1,12 @@
 <div id="time-spent">
   <canvas id="time-spent-chart"></canvas>
+  <% if @time_quote %>
+    <div class="quote time-quote">
+      <i class="fa fa-quote-left"></i>
+      <span><%= @time_quote %></span>
+      <i class="fa fa-quote-right"></i>
+    </div>
+  <% end %>
 </div>
 
 <% content_for :footer do %>

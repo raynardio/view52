@@ -42,3 +42,22 @@ form {
   width: 200px;
   height: 200px;
 }
+
+.quote {
+  margin: 1em;
+  text-align: right;
+
+  i {
+    color: lightgray;
+  }
+
+  span {
+    font-style: italic;
+    color: darkgray;
+    font-size: 1.2em;
+  }
+
+  &.time-quote {
+    font-size: 0.8em;
+  }
+}

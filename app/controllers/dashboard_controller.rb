@@ -4,6 +4,8 @@ class DashboardController < ApplicationController
   def index
     # TODO: Create only necessary instance variables
     if current_user.onboarded?
+      @quote = Quote.random.text
+      @time_quote = Quote.random('time').text
       @today = Date.today
       @annual_dates = []
       (0..9).each do |x|
