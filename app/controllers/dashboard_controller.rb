@@ -12,6 +12,7 @@ class DashboardController < ApplicationController
           @annual_dates[x] << current_user.date_of_birth + ((x * 10) + y).years
         end
       end
+      @role_categories = current_user.role_categories.order(importance: :desc)
     else
       redirect_to profile_path
     end

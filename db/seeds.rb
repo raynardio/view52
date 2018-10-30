@@ -1,14 +1,11 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
+ROLE_CATEGORIES = [
+    { label: 'intellectual', icon_class: 'ti-book' },
+    { label: 'health', icon_class: 'ti-pulse' },
+    { label: 'vocational', icon_class: 'ti-clipboard' },
+    { label: 'avocational', icon_class: 'ti-basketball' },
+    { label: 'spiritual', icon_class: 'ti-thought' },
+    { label: 'financial', icon_class: 'ti-money' },
+    { label: 'social', icon_class: 'ti-user' }
+]
 
-role_categories =
-    %w(intellectual health vocational avocational
-    spiritual financial social)
-RoleCategory.create!(role_categories.map do |label|
-  { label: label }
-end)
+RoleCategory.create! ROLE_CATEGORIES

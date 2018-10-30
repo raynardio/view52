@@ -18,4 +18,16 @@
 class UserRoleCategory < ApplicationRecord
   belongs_to :user
   belongs_to :role_category
+
+  def goals
+    Goal.where user_id: user_id, role_category_id: role_category_id
+  end
+
+  def short_name
+    role_category.short_name
+  end
+
+  def icon_class
+    role_category.icon_class
+  end
 end

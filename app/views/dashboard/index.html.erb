@@ -1,6 +1,6 @@
 <div id="dashboard">
   <% if current_user.onboarded? %>
-    <%= render partial: 'shared/annual_view' %>
+    <%= render partial: 'dashboard/content' %>
   <% else %>
     <div class="text-center">
       <button id="get-started-button" class="btn btn-primary"><%= t :get_started_now_bang %></button>

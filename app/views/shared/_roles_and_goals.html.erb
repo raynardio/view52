@@ -1,0 +1,19 @@
+<div id="goals">
+  <div class="row">
+    <% @role_categories.each do |role_category| %>
+      <div class="col-md-4 text-right">
+        <div class="role-category">
+          <a href="<%= role_path role_category.role_category_id %>">
+            <span class="icon-holder">
+              <i class="<%= role_category.icon_class %>"></i>
+            </span>
+            <%= role_category.short_name %>
+          </a>
+        </div>
+      </div>
+      <div class="col-md-8">
+        <%= role_category.goals.map(&:text).join ', ' %>
+      </div>
+    <% end %>
+  </div>
+</div>

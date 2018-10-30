@@ -11,16 +11,18 @@ $font-secondary:          Roboto, -apple-system, system-ui, BlinkMacSystemFont, 
 // 	Default color
 //==================================
 
-$default-dark:            #515365;
-$default-white:           #ffffff;
-$default-gray:            #f6f7fb;
-$default-text-color:      #888da8;
-$default-primary:         #7774e7;
-$default-primary-alpha:   #7774e733;
-$default-success:         #37c936;
-$default-info :           #0f9aee;
-$default-warning:         #ffcc00;
-$default-danger:          #ff3c7e;
+$default-dark:             #515365;
+$default-white:            #ffffff;
+$default-gray:             #f6f7fb;
+$default-text-color:       #888da8;
+$default-primary:          #7774e7;
+$default-primary-alpha-11: #7774e711;
+$default-primary-alpha-33: #7774e733;
+$default-primary-alpha-66: #7774e766;
+$default-success:          #37c936;
+$default-info :            #0f9aee;
+$default-warning:          #ffcc00;
+$default-danger:           #ff3c7e;
 
 //==================================
 // 	Inverse color
