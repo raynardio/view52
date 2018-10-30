@@ -1,5 +1,7 @@
 <div id="dashboard">
-  <% unless current_user.onboarded? %>
+  <% if current_user.onboarded? %>
+    <%= render partial: 'shared/annual_view' %>
+  <% else %>
     <div class="text-center">
       <button id="get-started-button" class="btn btn-primary"><%= t :get_started_now_bang %></button>
     </div>
@@ -7,7 +9,5 @@
     <div id="onboarding" style="display: none">
       <%= render partial: 'onboarding/wizard' %>
     </div>
-  <% else %>
-    <%= render partial: 'shared/annual_view' %>
   <% end %>
 </div>

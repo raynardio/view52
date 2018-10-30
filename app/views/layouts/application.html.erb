@@ -63,7 +63,7 @@
     </div>
 
     <%= javascript_include_tag :app %>
-    <%= javascript_include_tag params[:controller] %>
+    <%= javascript_include_tag params[:controller] rescue '' %>
     <%= yield :footer %>
   </body>
 </html>

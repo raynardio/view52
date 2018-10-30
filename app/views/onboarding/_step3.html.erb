@@ -1,4 +1,4 @@
-<form id="step3-form" class="width-100" data-post-url="<%= user_registration_path %>">
+<form id="step3-form" class="width-100" data-post-url="<%= profile_path %>">
   <% RoleCategory.all.map(&:label).each do |category| %>
     <% Goal::TERMS.each do |term| %>
     <div class="row">
