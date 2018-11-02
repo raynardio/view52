@@ -1,20 +1,25 @@
 <div id="annual-view">
-  <% @annual_dates.each do |row| %>
-    <div class="row">
-      <% row.each do |date| %>
-        <div class="year col-md">
-          <% if @today.year == date.year %>
-            <div class="heading">
-              <%= date.strftime '%Y' %> - Age
-              <%= date.year - current_user.date_of_birth.year %>
-            </div>
-            <div class="content">
-              <i class="ti-location-pin"></i>
-              <%= t :you_are_here %>
-            </div>
-          <% end %>
-        </div>
-      <% end %>
-    </div>
-  <% end %>
+  <div class="hide-lt-768">
+    <% @annual_dates.each do |row| %>
+      <div class="row">
+        <% row.each do |date| %>
+          <div class="year col-md">
+            <% if @today.year == date.year %>
+              <div class="heading">
+                <%= date.strftime '%Y' %> - Age
+                <%= date.year - current_user.date_of_birth.year %>
+              </div>
+              <div class="content">
+                <i class="ti-location-pin"></i>
+                <%= t :you_are_here %>
+              </div>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+  <div class="show-lt-768">
+    <%= render partial: 'shared/small_calendar' %>
+  </div>
 </div>

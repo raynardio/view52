@@ -1,0 +1,8 @@
+<div class="small-calendar"  data-date="<%= Date.today.strftime '%m-%d-%Y' %>" data-provide="datepicker-inline">
+</div>
+
+<%= content_for :footer do %>
+  <script>
+    $('.calendar').datepicker();
+  </script>
+<% end %>
