@@ -4,4 +4,5 @@ Rails.application.routes.draw do
   get '/profile', to: 'profile#index'
   put '/profile', to: 'profile#update'
   resources :role, path: 'roles', only: [:index, :show]
+  get '/search', to: 'global_search#search'
 end

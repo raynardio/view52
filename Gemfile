@@ -41,6 +41,9 @@ gem 'bower-rails', '~> 0.11.0'
 gem 'sprockets-rails', '~> 3.2.1'
 gem 'cancan', '~> 1.6.10'
 gem 'devise', '~> 4.5.0'
+gem 'elasticsearch'
+gem 'multi_json'
+gem 'faraday'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

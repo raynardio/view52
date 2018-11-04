@@ -51,3 +51,5 @@
 
 
 //=// require_tree .
+
+//= require ./global_search
