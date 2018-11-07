@@ -1,0 +1,14 @@
+<div class="row">
+  <div class="col-md">
+    <div>
+      <% google_calendar_list.items.each do |calendar| %>
+        <div class="form-group">
+          <label>
+            <input type="checkbox">
+            <%= calendar.summary %>
+          </label>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
