@@ -82,3 +82,30 @@ h1 {
 .logo {
   margin-top: 0.2em;
 }
+
+#main-fab {
+  position: absolute;
+  right: 2em;
+  bottom: 2em;
+
+  span {
+    display: list-item;
+    list-style: none;
+
+    button {
+      margin-bottom: 5px;
+
+      &.notes {
+        background-color: mediumseagreen;
+      }
+    }
+
+    &.gone {
+      display: none !important;
+    }
+  }
+
+  #fab-toggle {
+    background-color: indianred;
+  }
+}

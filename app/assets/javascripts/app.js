@@ -1,4 +1,6 @@
 $(() => {
+  const MDCRipple = mdc.ripple.MDCRipple;
+
 	// Side Nav
 	function sideNav() {
 		$('.side-nav .side-nav-menu li a').on('click', function(e) {
@@ -115,4 +117,13 @@ $(() => {
     });
 	  return params;
   };
+
+  const $fab = $('#main-fab');
+  const $fabContent = $fab.find('.content');
+  const $fabToggle = $('#fab-toggle');
+
+  $fabToggle.click(() => {
+    $fabContent.toggleClass('gone');
+    $fabToggle.blur();
+  });
 });
