@@ -53,11 +53,12 @@ class User < ApplicationRecord
   EXERCISE_HOURS = %w(.25 .5 .75 1)
   DIET = %w(omnivore vegetarian pescitarian vegan)
 
-  has_many :user_roles
+  has_many :user_roles, dependent: :destroy
   alias_attribute :roles, :user_roles
-  has_many :user_role_categories
+  has_many :user_role_categories, dependent: :destroy
   alias_attribute :role_categories, :user_role_categories
-  has_many :goals
+  has_many :goals, dependent: :destroy
+  has_many :notes, dependent: :destroy
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,
