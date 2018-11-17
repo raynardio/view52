@@ -21,5 +21,9 @@ test:
   database: db/test.sqlite3
 
 production:
-  <<: *default
-  database: db/production.sqlite3
+  database: view52_web
+  adapter: postgresql
+  username: ju8gydbk8fmnqs86bagjis
+  password: tXX2ZXfeZ9PMLwAWGWKKwD
+  host: 127.0.0.1
+  pool: 10
