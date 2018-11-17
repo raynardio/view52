@@ -27,7 +27,7 @@
 
 			> a {
     			display: inline-block;
-    			max-width: 150px;
+    			max-width: 164px;
     			width: 100%;
 				
 				.logo {
@@ -217,6 +217,7 @@
 					}
 
 					.logo-dark {
+                        margin-top: 0.2em;
 						background-image: url('/assets/logo/logo-sm.png') !important;
 					}
 
@@ -268,17 +269,11 @@
 					a {
 						
 						.logo {
-							width: 150px;
+							width: 164px;
 							background-position: center left;
-						}
-
-						.logo-dark {
-							background-image: url('/assets/logo/logo.png') !important;
-						}
-
-						.logo-white {
-							background-image: url('/assets/logo/logo-white.png') !important;
-						}
+                            margin-top: 0.2em;
+                            background-image: url('/assets/logo/logo.png') !important;
+                        }
 					}
 				}
 
@@ -339,6 +334,7 @@
 						}
 
 						.logo-dark {
+                            margin-top: 0.2em;
 							background-image: url('/assets/logo/logo-sm.png') !important;
 						}
 
@@ -388,19 +384,12 @@
 						border-bottom: 1px solid $border-color;
 						
 						a {
-							
-							.logo {
-								width: 150px;
-								background-position: center left;
-							}
-
-							.logo-dark {
-								background-image: url('/assets/logo/logo.png') !important;
-							}
-
-							.logo-white {
-								background-image: url('/assets/logo/logo-white.png') !important;
-							}
+                          .logo {
+                            width: 164px;
+                            background-position: center left;
+                            margin-top: 0.2em;
+                            background-image: url('/assets/logo/logo.png') !important;
+                          }
 						}
 					}
 
@@ -445,19 +434,13 @@
 					border-bottom: 1px solid $border-color;
 					
 					>a {
-						
-						.logo {
-							width: 150px;
-							background-position: center left;
-						}
 
-						.logo-dark {
-							background-image: url('/assets/logo/logo.png') !important;
-						}
-
-						.logo-white {
-							background-image: url('/assets/logo/logo-white.png') !important;
-						}
+                      .logo {
+                        width: 164px;
+                        background-position: center left;
+                        margin-top: 0.2em;
+                        background-image: url('/assets/logo/logo.png') !important;
+                      }
 					}
 				}
 

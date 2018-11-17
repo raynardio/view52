@@ -1,5 +1,7 @@
 {
   "name": "view52-web",
   "private": true,
-  "dependencies": {}
+  "dependencies": {
+    "@material/fab": "^0.41.0"
+  }
 }

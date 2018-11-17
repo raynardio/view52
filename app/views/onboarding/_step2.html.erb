@@ -1,0 +1,50 @@
+<form id="step2-form" class="width-100" data-post-url="<%= profile_path %>">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group">
+        <label>
+          <%= t :what_roles_do_you_play_in_the_present %>
+        </label>
+        <p class="font-italic">Ex. Brother, Philanthropist, Helper, Worker, Father, Swimmer, etc.</p>
+        <input type="text" class="selectize" name="present_roles" value="<%= @present_roles %>">
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label>
+          <%= t :what_roles_would_you_like_to_play_in_the_future %>
+        </label>
+        <p class="font-italic">Ex. Skier, Bookworm, Gymnast, Chef, etc.</p>
+        <input type="text" class="selectize" name="future_roles" value="<%= @future_roles %>">
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="form-group">
+        <label>
+          <%= t :what_do_you_value_most_at_the_present %>
+        </label>
+        <p class="font-italic">1 being the most important view in your life and 7 be the least concerned about. Don't worry - This can always change!</p>
+        <div class="row">
+          <div class="col-md-4"></div>
+          <% (1..7).each do |importance| %>
+            <div class="col-md-1"><%= importance %></div>
+          <% end %>
+        </div>
+        <% RoleCategory.find_each do |role_category| %>
+          <div class="row">
+            <div class="col-md-4 text-right text-bold"><%= t "role_category.#{role_category.label}" %></div>
+            <% (1..7).each do |importance| %>
+              <div class="col-md-1">
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input check" type="radio" name="role_category[<%= role_category.label %>]" value="<%= importance %>">
+                </div>
+              </div>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</form>

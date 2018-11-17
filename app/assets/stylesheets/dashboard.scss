@@ -1,3 +1,63 @@
 // Place all the styles related to the dashboard controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+@import 'variables';
+
+form {
+  label {
+    font-weight: bold;
+    font-size: large;
+  }
+
+  input[type=radio] {
+    width: 1.5em;
+    height: 1.5em;
+  }
+}
+
+#annual-view {
+  .year {
+    &:hover {
+      background: $default-primary-alpha-11;
+      cursor: pointer;
+    }
+
+    margin: 0 0.2em 0.2em 0;
+    padding: 0.2em;
+    min-height: 3em;
+    border: 1px solid $default-primary-alpha-33;
+
+    .heading {
+      font-size: 0.8em;
+    }
+
+    .content {
+      text-align: center;
+    }
+  }
+}
+
+#time-spent-chart {
+  width: 200px;
+  height: 200px;
+}
+
+.quote {
+  margin: 1em;
+  text-align: right;
+
+  i {
+    color: lightgray;
+  }
+
+  span {
+    font-style: italic;
+    color: darkgray;
+    font-size: 1.2em;
+  }
+
+  &.time-quote {
+    font-size: 0.8em;
+  }
+}

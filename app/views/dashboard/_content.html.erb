@@ -1,0 +1,42 @@
+<div class="quote">
+  <i class="fa fa-quote-left"></i>
+  <span><%= @quote %></span>
+  <i class="fa fa-quote-right"></i>
+</div>
+<div class="row">
+  <div class="col-md-8">
+    <div class="card">
+        <div class="card-heading border-bottom">
+          <h4 class="card-title">
+            <%= t :annual_summary %>
+          </h4>
+        </div>
+        <div class="card-block">
+          <%= render partial: 'shared/annual_view' %>
+        </div>
+      </div>
+  </div>
+  <div class="col-md-4">
+    <div class="card">
+      <div class="card-heading border-bottom">
+        <h4 class="card-title">
+          <%= t :roles_and_goals %>
+        </h4>
+      </div>
+      <div class="card-block">
+        <%= render partial: 'shared/roles_and_goals' %>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-heading border-bottom">
+        <h4 class="card-title">
+          <%= t :your_time %>
+        </h4>
+      </div>
+      <div class="card-block">
+        <%= render partial: 'shared/time_spent' %>
+      </div>
+    </div>
+  </div>
+</div>
+

@@ -1,5 +1,7 @@
 <div id="dashboard">
-  <% unless current_user.onboarded? %>
+  <% if current_user.onboarded? %>
+    <%= render partial: 'dashboard/content' %>
+  <% else %>
     <div class="text-center">
       <button id="get-started-button" class="btn btn-primary"><%= t :get_started_now_bang %></button>
     </div>

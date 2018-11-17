@@ -8,6 +8,7 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
+    <%= stylesheet_link_tag 'https://fonts.googleapis.com/icon?family=Material+Icons' %>
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
@@ -23,7 +24,7 @@
 
           <% if user_signed_in? %>
             <%= render partial: 'layouts/header' %>
-            <%= render partial: 'layouts/right_nav' %>
+            <%#= render partial: 'layouts/right_nav' %>
           <% end %>
 
           <!-- Content Wrapper START -->
@@ -39,6 +40,20 @@
 
               <%= yield %>
             </div>
+
+            <span id="main-fab">
+              <span class="content gone">
+                <button class="mdc-fab notes" aria-label="Note">
+                  <span class="mdc-fab__icon material-icons">notes</span>
+                </button>
+              </span>
+              <span>
+                <button id="fab-toggle" class="mdc-fab toggle">
+                  <span class="mdc-fab__icon material-icons">add</span>
+                </button>
+              </span>
+            </span>
+
           </div>
           <!-- Content Wrapper END -->
 
@@ -63,7 +78,7 @@
     </div>
 
     <%= javascript_include_tag :app %>
-    <%= javascript_include_tag params[:controller] %>
+    <%= javascript_include_tag params[:controller] rescue '' %>
     <%= yield :footer %>
   </body>
 </html>

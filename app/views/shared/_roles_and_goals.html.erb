@@ -1,0 +1,21 @@
+<div id="goals">
+    <% @role_categories.each do |role_category| %>
+    <div class="row">
+      <div class="flex-md-column flex-md-nowrap">
+        <div class="role-category">
+          <a href="<%= role_path role_category.role_category_id %>">
+            <span class="icon-holder">
+              <i class="<%= role_category.icon_class %>"></i>
+            </span>
+            <%= role_category.short_name %>
+          </a>
+        </div>
+      </div>
+      <div class="flex-md-column">
+        <% role_category.goals.map(&:text).each do |goal| %>
+          <span class="label label-default"><%= goal %></span>
+        <% end %>
+      </div>
+    </div>
+    <% end %>
+</div>

@@ -1,4 +1,6 @@
 $(() => {
+  const MDCRipple = mdc.ripple.MDCRipple;
+
 	// Side Nav
 	function sideNav() {
 		$('.side-nav .side-nav-menu li a').on('click', function(e) {
@@ -107,4 +109,21 @@ $(() => {
 	    cardPortletCtrl();
 	}
 	init();
+
+	window.formToJson = $form => {
+	  const params = {};
+	  $form.serializeArray().forEach(param => {
+	    params[param.name] = param.value;
+    });
+	  return params;
+  };
+
+  const $fab = $('#main-fab');
+  const $fabContent = $fab.find('.content');
+  const $fabToggle = $('#fab-toggle');
+
+  $fabToggle.click(() => {
+    $fabContent.toggleClass('gone');
+    $fabToggle.blur();
+  });
 });
