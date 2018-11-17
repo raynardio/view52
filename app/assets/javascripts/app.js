@@ -126,4 +126,8 @@ $(() => {
     $fabContent.toggleClass('gone');
     $fabToggle.blur();
   });
+
+  $('#note-modal').on('shown.bs.modal', () => {
+    $('#note').focus();
+  });
 });

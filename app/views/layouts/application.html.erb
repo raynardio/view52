@@ -68,6 +68,10 @@
       </div>
     </div>
 
+    <% if user_signed_in? %>
+      <%= render partial: 'shared/modal', locals: note_modal_options %>
+    <% end %>
+
     <%= javascript_include_tag :app %>
     <%= javascript_include_tag params[:controller] rescue '' %>
     <%= yield :footer %>
