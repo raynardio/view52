@@ -13,4 +13,5 @@ Rails.application.config.assets.paths << Rails.root.join('node_modules')
 # folder are already added.
 Rails.application.config.assets.precompile +=
     %w(app.js dashboard.js user/sessions.js onboarding_wizard.js) +
-      Dir.glob(File.join Rails.root, 'app', 'assets', 'javascripts', '*', '*.js')
+      Dir.glob(File.join Rails.root, 'app', 'assets', 'javascripts', '*', '*.js') +
+        [/\.(?:eot|otf|svg|ttf|woff|woff2)\z/]

@@ -49,4 +49,3 @@
 //= require perfect-scrollbar/js/perfect-scrollbar
 //= require perfect-scrollbar/js/perfect-scrollbar.jquery
 //= require @material/ripple/dist/mdc.ripple.min
-
