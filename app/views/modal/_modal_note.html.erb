@@ -1,0 +1,87 @@
+<div id="modal-note" class="modal fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">
+          <%= t :new_note %>
+        </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <textarea id="note-content" class="form-control"></textarea>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+          <%= t :close %>
+        </button>
+        <button type="button" class="btn btn-primary">
+          <%= t :save %>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%= content_for :footer do %>
+  <script>
+    $(() => {
+      const $note = $('#note-content');
+      const csrfToken = $('meta[name="csrf-token"]').attr('content');
+
+      $note.on('tribute-replaced', e => {
+        window.tagItem = e.detail.item;
+        console.log(`Entered: ${e.detail.item}`);
+
+        $.ajax({
+          url: '<%= tag_path %>',
+          method: 'POST',
+          beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', csrfToken)},
+          data: {
+            tag: e.detail.item.original.key
+          },
+          dataType: 'json',
+          success: res => {
+            console.log(`Tag saved: ${res}`);
+          },
+          error: err => {
+            console.error(`Tag error: ${err}`);
+          }
+        })
+      });
+
+      const tribute = new Tribute({
+        trigger: '#',
+        // noMatchTemplate: null,
+        menuItemTemplate: item => {
+          if (!item) return null;
+          return `#${item.original.key}`
+        },
+        values: (item, callback) => {
+          // console.log(JSON.stringify(item));
+          // callback([{ key: item}]);
+          $.ajax({
+            url: '<%= tag_path %>',
+            method: 'GET',
+            dataType: 'json',
+            success: res => {
+              if (res.length < 1){
+                callback([item]);
+              } else {
+                callback(res);
+              }
+            },
+            error: err => {
+              console.error(err);
+            }
+          })
+        },
+        lookup: 'key',
+        fillAttr: 'key'
+      });
+
+      tribute.attach($note[0]);
+    });
+  </script>
+<% end %>

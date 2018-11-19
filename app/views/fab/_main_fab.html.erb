@@ -1,0 +1,48 @@
+<span id="main-fab">
+  <span class="content gone">
+    <span class="fab-button">
+      <button type="button" id="fab-notes" class="mdc-fab link"
+              data-toggle="tooltip" data-placement="top"
+              title="<%= t :link %>" data-modal="link">
+        <span class="mdc-fab__icon material-icons">link</span>
+      </button>
+    </span>
+    <span class="fab-button">
+      <button type="button" id="fab-notes" class="mdc-fab event"
+              data-toggle="tooltip" data-placement="top"
+              title="<%= t :event %>" data-modal="event">
+        <span class="mdc-fab__icon material-icons">event</span>
+      </button>
+    </span>
+    <span class="fab-button">
+      <button type="button" id="fab-notes" class="mdc-fab note"
+          data-toggle="tooltip" data-placement="top"
+          title="<%= t :note %>" data-modal="note">
+        <span class="mdc-fab__icon material-icons">notes</span>
+      </button>
+    </span>
+  </span>
+  <span>
+    <button type="button" id="fab-toggle" class="mdc-fab toggle"
+        data-toggle="tooltip" data-placement="top" title="<%= t :create %>">
+      <span class="mdc-fab__icon material-icons">add</span>
+    </button>
+  </span>
+</span>
+
+<%= content_for :footer do %>
+  <script>
+    $(() => {
+      const $fabButtons = $('.fab-button button');
+
+      $fabButtons.each(function () {
+        const $button = $(this);
+        const modal = $button.data('modal');
+
+        $button.click(() => {
+          $(`#modal-${modal}`).modal('show');
+        });
+      });
+    });
+  </script>
+<% end %>

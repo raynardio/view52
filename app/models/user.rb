@@ -59,6 +59,7 @@ class User < ApplicationRecord
   alias_attribute :role_categories, :user_role_categories
   has_many :goals, dependent: :destroy
   has_many :notes, dependent: :destroy
+  has_many :tags, dependent: :destroy
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,

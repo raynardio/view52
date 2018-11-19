@@ -47,6 +47,7 @@ gem 'multi_json'
 gem 'faraday'
 gem 'google-api-client'
 gem 'redis'
+gem 'tribute'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

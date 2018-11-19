@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_17_225829) do
+ActiveRecord::Schema.define(version: 2018_11_18_011426) do
 
   create_table "goals", force: :cascade do |t|
     t.integer "user_id"
@@ -46,6 +46,20 @@ ActiveRecord::Schema.define(version: 2018_11_17_225829) do
   create_table "roles", primary_key: "label", id: :string, force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "tags", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "item_id"
+    t.string "tag_type"
+    t.string "item_type"
+    t.string "label"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id", "item_type"], name: "index_tags_on_user_id_and_item_type"
+    t.index ["user_id", "label"], name: "index_tags_on_user_id_and_label"
+    t.index ["user_id", "tag_type"], name: "index_tags_on_user_id_and_tag_type"
+    t.index ["user_id"], name: "index_tags_on_user_id"
   end
 
   create_table "user_role_categories", force: :cascade do |t|

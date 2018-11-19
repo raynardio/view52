@@ -127,7 +127,14 @@ $(() => {
     $fabToggle.blur();
   });
 
+  // $fabToggle.click(function () {
+  //   $('#modal-new-site').modal('show');
+  //   return false;
+  // });
+
   $('#note-modal').on('shown.bs.modal', () => {
     $('#note').focus();
   });
+
+  $('[data-toggle=tooltip]').tooltip();
 });

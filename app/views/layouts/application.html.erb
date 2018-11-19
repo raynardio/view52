@@ -42,7 +42,7 @@
             </div>
 
             <% if user_signed_in? %>
-              <%= render partial: 'layouts/main_fab' %>
+              <%= render partial: 'fab/main_fab' %>
             <% end %>
 
           </div>
@@ -69,7 +69,7 @@
     </div>
 
     <% if user_signed_in? %>
-      <%= render partial: 'shared/modal', locals: note_modal_options %>
+      <%= render partial: 'modal/modals' %>
     <% end %>
 
     <%= javascript_include_tag :app %>

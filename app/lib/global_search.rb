@@ -1,7 +1,7 @@
 class GlobalSearch
   include Elasticsearch::API
 
-  CONNECTION = ::Faraday::Connection.new url: 'http://branislav:9200'
+  CONNECTION = ::Faraday::Connection.new url: 'http://127.0.0.1:9200'
 
   def generate_id
     SecureRandom.base58 32

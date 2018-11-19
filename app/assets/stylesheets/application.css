@@ -26,6 +26,7 @@
  *= require photoswipe/dist/default-skin/default-skin
  *= require nouislider/distribute/nouislider.min
  *= require @material/fab/dist/mdc.fab.min
+ *= require tribute
  *= require_tree .
  *= require_self
  */

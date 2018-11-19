@@ -7,4 +7,6 @@ Rails.application.routes.draw do
   get '/search', to: 'global_search#search'
   get '/google/oauth2callback', to: 'google#oauth2callback'
   get '/google/calendar', to: 'google#calendar'
+  post '/tag', to: 'tag#create'
+  get '/tag', to: 'tag#index'
 end
