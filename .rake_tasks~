@@ -50,5 +50,6 @@ test:system
 time:zones[country_or_offset]
 tmp:clear
 tmp:create
+view52:fetch_calendar
 view52:global_index
 yarn:install

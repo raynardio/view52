@@ -54,12 +54,13 @@ class User < ApplicationRecord
   DIET = %w(omnivore vegetarian pescitarian vegan)
 
   has_many :user_roles, dependent: :destroy
-  alias_attribute :roles, :user_roles
   has_many :user_role_categories, dependent: :destroy
-  alias_attribute :role_categories, :user_role_categories
   has_many :goals, dependent: :destroy
   has_many :notes, dependent: :destroy
   has_many :tags, dependent: :destroy
+  has_many :calendar_events, dependent: :destroy
+  alias_attribute :role_categories, :user_role_categories
+  alias_attribute :roles, :user_roles
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,

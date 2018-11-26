@@ -10,7 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_18_011426) do
+ActiveRecord::Schema.define(version: 2018_11_26_185842) do
+
+  create_table "calendar_events", force: :cascade do |t|
+    t.integer "user_id"
+    t.string "title"
+    t.string "description"
+    t.string "event_type"
+    t.string "event_id"
+    t.string "html_link"
+    t.datetime "start_date"
+    t.datetime "end_date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id", "event_id", "event_type"], name: "index_calendar_events_on_user_id_and_event_id_and_event_type", unique: true
+    t.index ["user_id"], name: "index_calendar_events_on_user_id"
+  end
 
   create_table "goals", force: :cascade do |t|
     t.integer "user_id"

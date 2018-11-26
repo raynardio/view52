@@ -37,6 +37,8 @@ class DashboardController < ApplicationController
           other_hours
       ]
 
+      @events_today = current_user.calendar_events.where('start_date >= ?', Date.today)
+
     else
       redirect_to profile_path
     end

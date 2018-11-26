@@ -1,0 +1,23 @@
+<div id="calendar"></div>
+
+<% content_for :footer do %>
+  <script>
+    $(() => {
+      const $calendar = $('#calendar');
+
+      $calendar.fullCalendar({
+        defaultView: 'month',
+        header: {
+          left: 'prev,next today',
+          center: 'title',
+          right: 'month,listWeek,listYear'
+        },
+        eventClick: function (e) {
+          window.open(e.url, '_blank');
+          return false;
+        },
+        events: <%= @events.to_json.html_safe %>
+      });
+    });
+  </script>
+<% end %>

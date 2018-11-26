@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'calendar', to: 'calendar#index'
   devise_for :users, module: :user
   get '/', to: 'dashboard#index', as: 'dashboard'
   get '/profile', to: 'profile#index'

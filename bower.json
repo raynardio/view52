@@ -24,13 +24,12 @@
     "bootstrap-daterangepicker": "~2.1.19",
     "bootstrap-timepicker": "~0.5.2",
     "summernote": "~0.8.1",
-    "fullcalendar": "~2.7.2",
+    "fullcalendar": "~3.0.0",
     "sweetalert": "https://github.com/t4t5/sweetalert.git#~0.3.0",
     "selectize":"https://github.com/selectize/selectize.js.git",
     "d3": "~3.5.17",
     "nvd3": "^1.7.1",
     "chart.js": "^2.5.0",
-    "sticky": "~1.0.4",
-    "@material/fab"
+    "sticky": "~1.0.4"
   }
 }

@@ -6,8 +6,12 @@ class GoogleCalendar
     @user = user
   end
 
-  def list_calendars
+  def calendars
     service.list_calendar_lists
+  end
+
+  def events(calendar_id)
+    service.list_events calendar_id
   end
 
   private

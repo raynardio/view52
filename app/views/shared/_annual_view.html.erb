@@ -3,7 +3,7 @@
     <% @annual_dates.each do |row| %>
       <div class="row">
         <% row.each do |date| %>
-          <div class="year col-md">
+          <a href="<%= calendar_path %>" class="year col-md">
             <% if @today.year == date.year %>
               <div class="heading">
                 <%= date.strftime '%Y' %> - Age
@@ -14,7 +14,7 @@
                 <%= t :you_are_here %>
               </div>
             <% end %>
-          </div>
+          </a>
         <% end %>
       </div>
     <% end %>

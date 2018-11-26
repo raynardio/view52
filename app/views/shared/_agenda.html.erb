@@ -1,0 +1,14 @@
+<div id="calendar"></div>
+
+<% content_for :footer do %>
+  <script>
+    $(() => {
+      const $calendar = $('#calendar');
+
+      $calendar.fullCalendar({
+        defaultView: 'agendaDay',
+        events: <%= @events_today.to_json.html_safe %>
+      });
+    });
+  </script>
+<% end %>
