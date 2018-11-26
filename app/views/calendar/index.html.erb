@@ -1,3 +1,10 @@
 <h1 class="text-center"><%= t :my_calendar %></h1>
 
+<div>
+  <a class="btn btn-primary" href="<%= google_calendar_path %>">
+    <i class="ti-google"></i>
+    <%= t :google_calendar %>
+  </a>
+</div>
+
 <%= render partial: 'shared/calendar' %>

@@ -1,14 +1,31 @@
-<div class="row">
-  <div class="col-md">
-    <div>
-      <% google_calendar_list.items.each do |calendar| %>
-        <div class="form-group">
-          <label>
-            <input type="checkbox">
-            <%= calendar.summary %>
-          </label>
-        </div>
-      <% end %>
-    </div>
-  </div>
+<div id="calendar-list" class="list-group">
+  <% google_calendar_list.items.each do |calendar| %>
+    <button type="button" data-calendar-id="<%= calendar.id %>" class="active list-group-item list-group-item-action">
+      <input type="checkbox" data-calendar-id="<%= calendar.id %>" checked>
+      <%= calendar.summary %>
+    </button>
+  <% end %>
+
+<button type="button" class="btn btn-primary save"><%= t :save %></button>
+
 </div>
+
+<%= content_for :footer do %>
+  <script>
+    $(() => {
+      const $calendarList = $('#calendar-list');
+      const $buttons = $calendarList.find('button');
+
+      $buttons.click(function() {
+        $(this).toggleClass('active');
+        $buttons.each(function () {
+          $(this).find('input').prop('checked', $(this).hasClass('active'));
+        });
+      });
+
+      $('button.save').click(function() {
+        $(this).prop('disabled', true);
+      });
+    });
+  </script>
+<% end %>
