@@ -89,3 +89,4 @@ en:
   agenda: "Agenda"
   google_calendar: "Google Calendar"
   select_calendars: "Select Calendars"
+  success_fetching_calendar: "Success! Fetching Calendar..."

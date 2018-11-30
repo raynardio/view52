@@ -6,7 +6,12 @@
       const $calendar = $('#calendar');
 
       $calendar.fullCalendar({
-        defaultView: 'month',
+        defaultView: '<%= @calendar[:view] %>',
+        defaultDate: moment().set({
+            year: <%= @calendar[:date].year %>,
+            month: <%= @calendar[:date].month - 1 %>,
+            date: <%= @calendar[:date].day %>
+        }),
         header: {
           left: 'prev,next today',
           center: 'title',
@@ -16,7 +21,7 @@
           window.open(e.url, '_blank');
           return false;
         },
-        events: <%= @events.to_json.html_safe %>
+        events: <%= @calendar[:events].to_json.html_safe %>
       });
     });
   </script>

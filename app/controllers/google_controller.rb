@@ -11,6 +11,11 @@ class GoogleController < ApplicationController
   def calendar
   end
 
+  def update
+    flash[:notice] = I18n.t(:success_fetching_calendar)
+    redirect_to controller: :calendar
+  end
+
   private
 
   def google_auth!
