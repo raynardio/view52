@@ -1,26 +1,26 @@
 # == Schema Information
 #
-# Table name: notes
+# Table name: views
 #
 #  id         :integer          not null, primary key
 #  user_id    :integer
-#  text       :string
+#  item_type  :string
+#  item_id    :integer
+#  label      :string
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
-#  title      :string
-#
-# Indexes
-#
-#  index_notes_on_title    (title)
-#  index_notes_on_user_id  (user_id)
 #
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
   user_id: 1
-  text: MyString
+  item_type: MyString
+  item_id: 1
+  label: MyString
 
 two:
   user_id: 1
-  text: MyString
+  item_type: MyString
+  item_id: 1
+  label: MyString

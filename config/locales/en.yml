@@ -90,3 +90,7 @@ en:
   google_calendar: "Google Calendar"
   select_calendars: "Select Calendars"
   success_fetching_calendar: "Success! Fetching Calendar..."
+  title: "Title"
+  content: "Content"
+  views_parens: "View(s)"
+  tags: "Tags"

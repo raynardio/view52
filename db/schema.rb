@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_26_185842) do
+ActiveRecord::Schema.define(version: 2018_12_13_003423) do
 
   create_table "calendar_events", force: :cascade do |t|
     t.integer "user_id"
@@ -42,6 +42,8 @@ ActiveRecord::Schema.define(version: 2018_11_26_185842) do
     t.string "text"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "title"
+    t.index ["title"], name: "index_notes_on_title"
     t.index ["user_id"], name: "index_notes_on_user_id"
   end
 
@@ -132,6 +134,15 @@ ActiveRecord::Schema.define(version: 2018_11_26_185842) do
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  end
+
+  create_table "views", force: :cascade do |t|
+    t.integer "user_id"
+    t.string "item_type"
+    t.integer "item_id"
+    t.string "label"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
 end
