@@ -1,0 +1,5 @@
+<% @notes.each do |note| %>
+  <div>
+    <a href="<%= url_for note %>"><%= note.title %></a>
+  </div>
+<% end %>

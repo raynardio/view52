@@ -1,6 +1,10 @@
 class NoteController < ApplicationController
   before_action :authenticate_user!
 
+  def index
+    @notes = current_user.notes
+  end
+
   def create
     p params
     tags = params[:tags] && params[:tags].split || []
@@ -32,5 +36,6 @@ class NoteController < ApplicationController
   end
 
   def show
+    @note = current_user.notes.find params[:id]
   end
 end
