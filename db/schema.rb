@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_13_003423) do
+ActiveRecord::Schema.define(version: 2018_12_15_204817) do
 
   create_table "calendar_events", force: :cascade do |t|
     t.integer "user_id"
@@ -35,6 +35,15 @@ ActiveRecord::Schema.define(version: 2018_12_13_003423) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_goals_on_user_id"
+  end
+
+  create_table "images", force: :cascade do |t|
+    t.integer "item_id"
+    t.string "item_type"
+    t.string "category"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "content_type"
   end
 
   create_table "notes", force: :cascade do |t|
@@ -141,6 +150,17 @@ ActiveRecord::Schema.define(version: 2018_12_13_003423) do
     t.string "item_type"
     t.integer "item_id"
     t.string "label"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "web_links", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "item_id"
+    t.string "item_type"
+    t.string "url"
+    t.string "title"
+    t.string "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

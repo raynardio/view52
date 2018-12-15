@@ -1,0 +1,58 @@
+<script type="template" id="web-link-template">
+  <div id="modal-web-link" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title"><%= t :new_link %></h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <input type="url" class="form-control" id="web-link-url">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">
+            <%= t :close %>
+          </button>
+          <button id="note-submit" type="button" class="btn btn-primary">
+            <%= t :save %>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</script>
+
+<script type="template" id="web-link-content-template">
+
+</script>
+
+<div id="web-link-modal"></div>
+
+<%= content_for :footer do %>
+  <script>
+    function initWebLinkModal() {
+      const $webLinkTemplate = $('#web-link-template');
+      const $webLinkModal = $('#web-link-modal');
+
+      $webLinkModal.html($webLinkTemplate.html());
+
+      const $webLinkUrl = $('#web-link-url');
+
+      $webLinkUrl.keypress(function(e) {
+        if (e.keyCode === 13) {
+          const url = $webLinkUrl.val();
+
+
+        }
+      });
+    }
+
+    $(() => {
+      initWebLinkModal();
+    });
+  </script>
+<% end %>
