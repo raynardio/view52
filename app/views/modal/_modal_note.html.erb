@@ -1,87 +1,153 @@
-<div id="modal-note" class="modal fade" tabindex="-1" role="dialog">
-  <div class="modal-dialog modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">
-          <%= t :new_note %>
-        </h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <textarea id="note-content" class="form-control"></textarea>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">
-          <%= t :close %>
-        </button>
-        <button type="button" class="btn btn-primary">
-          <%= t :save %>
-        </button>
+<script type="template" id="note-template">
+  <div id="modal-note" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">
+            <%= t :new_note %>
+          </h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="note-title">
+              <%= t :title %>
+            </label>
+            <input class="form-control" type="text" name="title" id="note-title">
+          </div>
+          <div class="form-group">
+            <label for="note-views"><%= t :views_parens %></label>
+            <input class="selectize" type="text" name="views" id="note-views">
+          </div>
+          <div class="form-group">
+            <label for="note-tags"><%= t :tags %></label>
+            <input id="note-tags" class="selectize" type="text" name="tags">
+          </div>
+          <div class="form-group">
+            <label for="note-content"><%= t :content %></label>
+            <textarea id="note-content" class="form-control"></textarea>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">
+            <%= t :close %>
+          </button>
+          <button id="note-submit" type="button" class="btn btn-primary">
+            <%= t :save %>
+          </button>
+        </div>
       </div>
     </div>
   </div>
-</div>
+</script>
+
+<div id="note-modal-content"></div>
 
 <%= content_for :footer do %>
   <script>
-    $(() => {
+    function initNoteModal() {
+      const $noteTemplate = $('#note-template');
+      const $noteModalContent = $('#note-modal-content');
+      $noteModalContent.html($noteTemplate.html());
+
       const $note = $('#note-content');
+      const $noteViews = $('#note-views');
+      const $noteTags = $('#note-tags');
+      const $noteModal = $('#modal-note');
+      const $noteTitle = $('#note-title');
+      const $noteSubmit = $('#note-submit');
       const csrfToken = $('meta[name="csrf-token"]').attr('content');
 
-      $note.on('tribute-replaced', e => {
-        window.tagItem = e.detail.item;
-        console.log(`Entered: ${e.detail.item}`);
 
+      $noteSubmit.click(() => {
+        $noteSubmit.attr('disabled', true);
         $.ajax({
-          url: '<%= tag_path %>',
+          url: '<%= note_index_path %>',
           method: 'POST',
           beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', csrfToken)},
-          data: {
-            tag: e.detail.item.original.key
-          },
           dataType: 'json',
-          success: res => {
-            console.log(`Tag saved: ${res}`);
+          data: {
+            title: $noteTitle.val(),
+            views: $noteViews.val(),
+            tags: $noteTags.val(),
+            note: $note.val()
+          },
+          success: () => {
+            $noteModal.modal('hide');
+            $noteModal.on('hidden.bs.modal', initNoteModal);
           },
           error: err => {
-            console.error(`Tag error: ${err}`);
+            console.error(`submit error: ${JSON.stringify(err)}`);
           }
-        })
+        });
       });
 
-      const tribute = new Tribute({
-        trigger: '#',
-        // noMatchTemplate: null,
-        menuItemTemplate: item => {
-          if (!item) return null;
-          return `#${item.original.key}`
-        },
-        values: (item, callback) => {
-          // console.log(JSON.stringify(item));
-          // callback([{ key: item}]);
+      $noteModal.on('show.bs.modal', () => {
+        setTimeout(() => { $noteTitle.focus(); }, 500);
+      });
+
+      $noteViews.selectize({
+        delimiter: ' ',
+        loadThrottle: 100,
+        valueField: 'label',
+        labelField: 'label',
+        searchField: 'label',
+        load: (query, callback) => {
+          if (!query.length) return callback();
           $.ajax({
-            url: '<%= tag_path %>',
+            url: `<%= autocomplete_views_path %>?q=${encodeURIComponent(query)}`,
             method: 'GET',
-            dataType: 'json',
-            success: res => {
-              if (res.length < 1){
-                callback([item]);
-              } else {
-                callback(res);
-              }
+            error: () => {
+              console.error('selectize error!');
+              callback();
             },
-            error: err => {
-              console.error(err);
+            success: res => {
+              console.log(res);
+              callback(res);
             }
-          })
-        },
-        lookup: 'key',
-        fillAttr: 'key'
+          });
+        }
       });
 
-      tribute.attach($note[0]);
+      $noteTags.selectize({
+        delimiter: ' ',
+        loadThrottle: 100,
+        valueField: 'label',
+        labelField: 'label',
+        searchField: 'label',
+        createOnBlur: true,
+        create: true,
+        // create: function(input) {
+        //   console.log(`Creating tag: ${input}`);
+        //   return {
+        //     value: input,
+        //     text: input
+        //   };
+        // },
+        load: (query, callback) => {
+          if (!query.length) return callback();
+          $.ajax({
+            url: `<%= autocomplete_tags_path %>?q=${encodeURIComponent(query)}`,
+            method: 'GET',
+            error: () => {
+              console.error('selectize error!');
+              callback();
+            },
+            success: res => {
+              console.log(res);
+              callback(res);
+            }
+          });
+        }
+      });
+
+      $note.summernote();
+    }
+
+    $(() => {
+      initNoteModal();
     });
   </script>
 <% end %>

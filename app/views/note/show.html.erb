@@ -1,0 +1,21 @@
+<h4>
+  <%= @note.title %>
+</h4>
+
+<div>
+  Tags:
+  <% @note.tags.each do |tag| %>
+    <span><%= tag.label %></span>
+  <% end %>
+</div>
+
+<div>
+  Views:
+  <% @note.views.each do |view| %>
+    <%= view.label %>
+  <% end %>
+</div>
+
+<div>
+  <%= @note.text.html_safe %>
+</div>

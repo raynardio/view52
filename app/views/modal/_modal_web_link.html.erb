@@ -1,0 +1,53 @@
+<script type="template" id="web-link-template">
+  <%= form_tag controller: :web_link, action: :create do %>
+  <div id="modal-web-link" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title"><%= t :new_link %></h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <input type="url" name="url" class="form-control" id="web-link-url">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">
+            <%= t :close %>
+          </button>
+          <input type="submit" class="btn btn-primary" value="<%= t :save %>">
+        </div>
+      </div>
+    </div>
+  </div>
+  <% end %>
+</script>
+
+<div id="web-link-modal"></div>
+
+<%= content_for :footer do %>
+  <script>
+    $(() => {
+      function initWebLinkModal() {
+        const $webLinkTemplate = $('#web-link-template');
+        const $webLinkModal = $('#web-link-modal');
+        $webLinkModal.html($webLinkTemplate.html());
+        const $webLinkUrl = $webLinkModal.find('#web-link-url');
+
+        $webLinkModal.on('show.bs.modal', () => {
+          setTimeout(() => $webLinkUrl.focus(), 500);
+        });
+
+        // $webLinkUrl.keypress(function(e) {
+        //   if (e.keyCode === 13) {
+        //   }
+        // });
+      }
+
+      initWebLinkModal();
+    });
+  </script>
+<% end %>

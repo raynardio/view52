@@ -137,4 +137,12 @@ $(() => {
   });
 
   $('[data-toggle=tooltip]').tooltip();
+
+  window.ajax = (options) => {
+    const csrfToken = $('meta[name="csrf-token"]').attr('content');
+    options = Object.assign(options, {
+      beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', csrfToken)},
+    });
+    $.ajax(options);
+  };
 });

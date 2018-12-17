@@ -8,10 +8,20 @@ default: &default
   adapter: sqlite3
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   timeout: 5000
+  encoding: utf-8
+
+postgres: &postgres
+  adapter: postgresql
+  username: ju8gydbk8fmnqs86bagjis
+  password: tXX2ZXfeZ9PMLwAWGWKKwD
+  host: 127.0.0.1
+  pool: 10
 
 development:
-  <<: *default
-  database: db/development.sqlite3
+  <<: *postgres
+  database: view52_web_dev
+#  <<: *default
+#  database: db/development.sqlite3
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".

@@ -1,9 +1,17 @@
 <div id="annual-view">
   <div class="hide-lt-768">
-    <% @annual_dates.each do |row| %>
+    <div class="row">
+<!--      <div class="col-md"></div>-->
+      <% (1..10).each do |num| %>
+        <div class="col-md text-center"><%= num %></div>
+      <% end %>
+    </div>
+    <% @annual_dates.each_with_index do |row, num| %>
       <div class="row">
+<!--        <div class="col-md"><%#= num + 1 %></div>-->
+        <span style="vertical-align: middle; display: table-cell"><%= num + 1 %></span>
         <% row.each do |date| %>
-          <a href="<%= calendar_path %>" class="year col-md">
+          <a href="<%= url_for controller: :calendar, view: 'listYear', year: date.year %>" class="year col-md">
             <% if @today.year == date.year %>
               <div class="heading">
                 <%= date.strftime '%Y' %> - Age

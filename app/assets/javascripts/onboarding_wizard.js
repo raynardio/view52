@@ -178,7 +178,9 @@ $(() => {
     }
   });
 
-  $('select').selectize({});
+  $('select').selectize({
+    create: true
+  });
 
   $('.selectize').selectize({
     delimiter: ' ',
