@@ -1,6 +1,22 @@
 class ViewController < ApplicationController
   before_action :authenticate_user!
 
+  def index
+    redirect_to dashboard_path
+  end
+
+  def show
+    @view = {
+        label: params[:id].capitalize,
+        long_term_goals: current_user.goals.where(term: 'long', role_category_id: params[:id]).all,
+        short_term_goals: current_user.goals.where(term: 'short', role_category_id: params[:id]).all,
+        web_links: current_user.views
+             .includes(:item)
+             .where(label: params[:id], item_type: 'WebLink')
+             .map(&:item)
+    }
+  end
+
   def create
     view = View.create!({
       user: current_user,

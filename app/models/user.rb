@@ -58,6 +58,7 @@ class User < ApplicationRecord
   has_many :goals, dependent: :destroy
   has_many :notes, dependent: :destroy
   has_many :tags, dependent: :destroy
+  has_many :views, dependent: :destroy
   has_many :calendar_events, dependent: :destroy
   has_many :web_links, as: :item, dependent: :destroy
   alias_attribute :role_categories, :user_role_categories

@@ -1,4 +1,4 @@
-<div class="web-link">
+<div id="web-link-<%= link.id %>" class="web-link">
   <div class="card">
     <div class="card-body">
       <div class="card-title row">
@@ -18,8 +18,12 @@
 <%= content_for :footer do %>
   <script>
     $(() => {
-      $('.web-link').click(() => {
-        window.open('<%= link.url %>');
+      $('#web-link-<%= link.id %>').click(() => {
+        <% if defined? popout %>
+          window.open('<%= link.url %>');
+        <% else %>
+          location.href = '<%= url_for link %>';
+        <% end %>
       });
     });
   </script>

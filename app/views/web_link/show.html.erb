@@ -1,4 +1,4 @@
-<%= render partial: 'layouts/web_link_card', locals: { link: @link } %>
+<%= render partial: 'layouts/web_link_card', locals: { link: @link, popout: true } %>
 
 <div id="site-info">
   <div class="row">
@@ -95,7 +95,7 @@
         searchField: 'label',
         onItemAdd: value => {
           ajax({
-            url: '<%= view_path %>',
+            url: '<%= view_index_path %>',
             method: 'POST',
             dataType: 'json',
             data: {
@@ -109,7 +109,7 @@
         },
         onItemRemove: value => {
           ajax({
-            url: '<%= view_path %>',
+            url: '<%= view_index_path %>',
             method: 'DELETE',
             dataType: 'json',
             data: {

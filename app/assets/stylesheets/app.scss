@@ -87,7 +87,7 @@ h1 {
   position: fixed;
   right: 2em;
   bottom: 2em;
-  z-index: 1000;
+  z-index: 99999;
 
   span {
     display: list-item;
@@ -164,4 +164,18 @@ h1 {
     text-align: right;
   }
   margin-bottom: 2em;
+}
+
+#view-accordion {
+  .card {
+    margin: 0;
+  }
+
+  .card-header {
+    cursor: pointer;
+
+    h5 {
+      font-weight: bold;
+    }
+  }
 }

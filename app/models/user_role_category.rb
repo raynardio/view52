@@ -30,4 +30,8 @@ class UserRoleCategory < ApplicationRecord
   def icon_class
     role_category.icon_class
   end
+
+  def label
+    role_category.label
+  end
 end

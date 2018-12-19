@@ -1,0 +1,63 @@
+<h1 class="text-center"><%= @view[:label] %></h1>
+
+<div class="accordion" id="view-accordion">
+  <div class="card">
+    <div class="card-header" id="long-goal-header" data-toggle="collapse" data-target="#long-goal-content">
+      <h5 class="mb-0">
+<!--        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#long-goal-content" aria-expanded="true" aria-controls="long-goal-content">-->
+         <%= "#{t :long_term_goals} (#{@view[:long_term_goals].size})" %>
+<!--        </button>-->
+      </h5>
+    </div>
+    <div id="long-goal-content" class="collapse" aria-labelledby="long-goal-header" data-parent="#view-accordion">
+      <div class="card-body">
+          <div class="row">
+            <% @view[:long_term_goals].each do |goal| %>
+              <div class="label label-info label-lg"><%= goal.text %></div>
+            <% end %>
+          </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" id="short-goal-header" data-toggle="collapse" data-target="#short-goal-content">
+      <h5 class="mb-0">
+        <!--        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#short-goal-content" aria-expanded="true" aria-controls="short-goal-content">-->
+        <%= "#{t :short_term_goals} (#{@view[:short_term_goals].size})" %>
+        <!--        </button>-->
+      </h5>
+    </div>
+    <div id="short-goal-content" class="collapse" aria-labelledby="short-goal-header" data-parent="#view-accordion">
+      <div class="card-body">
+        <div class="row">
+          <% @view[:short_term_goals].each do |goal| %>
+            <div class="label label-info label-lg"><%= goal.text %></div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" id="web-link-header" data-toggle="collapse" data-target="#web-link-content">
+      <h5 class="mb-0">
+<!--        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#web-link-content" aria-expanded="false" aria-controls="web-link-content">-->
+          <%= "#{t :links} (#{@view[:web_links].count})" %>
+<!--        </button>-->
+      </h5>
+    </div>
+
+    <div id="web-link-content" class="collapse" aria-labelledby="web-link-header" data-parent="#view-accordion">
+      <div class="card-body">
+        <div class="row">
+          <% @view[:web_links].each do |link| %>
+            <div class="col-md">
+              <%= render partial: 'layouts/web_link_card', locals: { link: link } %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

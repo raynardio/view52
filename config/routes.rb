@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   resources :web_link do
     get 'html', to: 'web_link#html'
   end
+  resources :view, only: [:show, :index]
   post '/view', to: 'view#create'
   delete '/view', to: 'view#destroy'
 end

@@ -41,7 +41,7 @@
         <ul class="dropdown-menu">
           <% RoleCategory.order(:label).each do |role_category| %>
             <li>
-              <a>
+              <a href="<%= view_path role_category.label %>">
                 <span class="icon-holder">
                   <i class="<%= role_category.icon_class %>"></i>
                 </span>
