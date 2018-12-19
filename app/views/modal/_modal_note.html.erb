@@ -26,6 +26,10 @@
             <input id="note-tags" class="selectize" type="text" name="tags">
           </div>
           <div class="form-group">
+            <label for="note-views"><%= t :urls %></label>
+            <input class="selectize" type="text" name="urls" id="note-urls">
+          </div>
+          <div class="form-group">
             <label for="note-content"><%= t :content %></label>
             <textarea id="note-content" class="form-control"></textarea>
           </div>
@@ -55,6 +59,7 @@
       const $note = $('#note-content');
       const $noteViews = $('#note-views');
       const $noteTags = $('#note-tags');
+      const $noteUrls = $('#note-urls');
       const $noteModal = $('#modal-note');
       const $noteTitle = $('#note-title');
       const $noteSubmit = $('#note-submit');
@@ -86,6 +91,11 @@
 
       $noteModal.on('show.bs.modal', () => {
         setTimeout(() => { $noteTitle.focus(); }, 500);
+      });
+
+      $noteUrls.selectize({
+        delimiter: ' ',
+        create: true
       });
 
       $noteViews.selectize({

@@ -10,8 +10,13 @@ Rails.application.routes.draw do
   get '/google/calendar', to: 'google#calendar'
   post '/tag', to: 'tag#create'
   get '/tag', to: 'tag#index'
+  delete '/tag', to: 'tag#destroy'
   get '/autocomplete/views', to: 'autocomplete#views'
   get '/autocomplete/tags', to: 'autocomplete#tags'
   resources :note
-  resources :web_link
+  resources :web_link do
+    get 'html', to: 'web_link#html'
+  end
+  post '/view', to: 'view#create'
+  delete '/view', to: 'view#destroy'
 end

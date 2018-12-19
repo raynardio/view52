@@ -11,7 +11,7 @@
         </div>
         <div class="modal-body">
           <div class="form-group">
-            <input type="url" name="url" class="form-control" id="web-link-url">
+            <input type="text" name="url" class="form-control" id="web-link-url">
           </div>
         </div>
         <div class="modal-footer">
@@ -37,14 +37,13 @@
         $webLinkModal.html($webLinkTemplate.html());
         const $webLinkUrl = $webLinkModal.find('#web-link-url');
 
+        $webLinkModal.find('form').on('submit', () => {
+          $webLinkModal.find('input[type=submit]').attr('disabled', true);
+        });
+
         $webLinkModal.on('show.bs.modal', () => {
           setTimeout(() => $webLinkUrl.focus(), 500);
         });
-
-        // $webLinkUrl.keypress(function(e) {
-        //   if (e.keyCode === 13) {
-        //   }
-        // });
       }
 
       initWebLinkModal();

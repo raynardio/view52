@@ -2,7 +2,7 @@
 #
 # Table name: tags
 #
-#  id         :integer          not null, primary key
+#  id         :bigint(8)        not null, primary key
 #  user_id    :integer
 #  item_id    :integer
 #  tag_type   :string

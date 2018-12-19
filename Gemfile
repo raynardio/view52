@@ -50,6 +50,7 @@ gem 'redis'
 gem 'tribute'
 gem 'link_thumbnailer'
 gem 'rest-client'
+gem 'nokogiri'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

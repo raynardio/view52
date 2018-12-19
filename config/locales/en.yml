@@ -95,3 +95,6 @@ en:
   views_parens: "View(s)"
   tags: "Tags"
   new_link: "New Link"
+  urls: "URLs"
+  show: "Show"
+  hide: "Hide"

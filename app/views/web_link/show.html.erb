@@ -1,1 +1,161 @@
-<%= render 'layouts/web_link' %>
+<%= render 'layouts/web_link_card' %>
+
+<div id="site-info">
+  <div class="row">
+    <div class="col-md-1"><%= t :tags %></div>
+    <input id="site-tags" class="col-md" value="<%= @link.tags.map(&:label).join ' ' %>">
+  </div>
+  <div class="row">
+    <div class="col-md-1"><%= t :views %></div>
+    <input id="site-views" class="col-md" value="<%= @link.views.map(&:label).join ' ' %>">
+  </div>
+</div>
+
+<div>
+  <button id="toggle-site-button" type="button" class="btn btn-primary active">
+    <span class="text"><%= t :show %></span>
+    <i class="fa fa-angle-double-down"></i>
+  </button>
+</div>
+
+<div id="web-link-collapse" class="collapse">
+  <div class="card">
+    <iframe id="web-link-frame"></iframe>
+  </div>
+</div>
+
+
+<%= content_for :footer do %>
+  <script>
+    $(() => {
+      const $toggleButton = $('#toggle-site-button');
+      const $webLinkCollapse = $('#web-link-collapse');
+      const $webLinkFrame = $('#web-link-frame');
+      const $siteTags = $('#site-tags');
+      const $siteViews = $('#site-views');
+      const linkId = <%= @link.id %>;
+
+      $siteTags.selectize({
+        delimiter: ' ',
+        loadThrottle: 100,
+        valueField: 'label',
+        labelField: 'label',
+        searchField: 'label',
+        createOnBlur: true,
+        create: true,
+        onItemAdd: value => {
+          ajax({
+            url: '<%= tag_path %>',
+            method: 'POST',
+            dataType: 'json',
+            data: {
+              tag: value,
+              item_type: 'WebLink',
+              item_id: linkId
+            },
+            success: tag => console.log(`Added: ${tag}`),
+            error: console.error
+          })
+        },
+        onItemRemove: value => {
+          ajax({
+            url: '<%= tag_path %>',
+            method: 'DELETE',
+            dataType: 'json',
+            data: {
+              item_type: 'WebLink',
+              tag: value
+            },
+            success: tag => console.log(`Removed tag: ${tag}`),
+            error: console.error
+          });
+        },
+        load: (query, callback) => {
+          if (!query.length) return callback();
+          $.ajax({
+            url: `<%= autocomplete_tags_path %>?q=${encodeURIComponent(query)}`,
+            method: 'GET',
+            error: () => {
+              console.error('selectize error!');
+              callback();
+            },
+            success: res => {
+              console.log(res);
+              callback(res);
+            }
+          });
+        }
+      });
+
+      $siteViews.selectize({
+        delimiter: ' ',
+        loadThrottle: 100,
+        valueField: 'label',
+        labelField: 'label',
+        searchField: 'label',
+        onItemAdd: value => {
+          ajax({
+            url: '<%= view_path %>',
+            method: 'POST',
+            dataType: 'json',
+            data: {
+              view: value,
+              item_type: 'WebLink',
+              item_id: linkId
+            },
+            success: tag => console.log(`Added: ${tag}`),
+            error: console.error
+          })
+        },
+        onItemRemove: value => {
+          ajax({
+            url: '<%= view_path %>',
+            method: 'DELETE',
+            dataType: 'json',
+            data: {
+              view: value,
+              item_type: 'WebLink'
+            },
+            success: tag => console.log(`Removed: ${tag}`),
+            error: console.error
+          })
+        },
+        load: (query, callback) => {
+          if (!query.length) return callback();
+          $.ajax({
+            url: `<%= autocomplete_views_path %>?q=${encodeURIComponent(query)}`,
+            method: 'GET',
+            error: () => {
+              console.error('selectize error!');
+              callback();
+            },
+            success: res => {
+              callback(res);
+            }
+          });
+        }
+      });
+
+      $toggleButton.click(() => {
+        const active = !$toggleButton.toggleClass('active').hasClass('active');
+
+        if (active) {
+          if (!$webLinkFrame.attr('src')) {
+            $webLinkFrame.attr('src', '<%= web_link_html_path web_link_id: @link.id %>');
+          }
+          $webLinkCollapse.collapse('show');
+          $toggleButton.find('.text').text('<%= t :hide %>');
+          $toggleButton.find('i')
+              .removeClass('fa-angle-double-down')
+              .addClass('fa-angle-double-up');
+        } else {
+          $webLinkCollapse.collapse('hide');
+          $toggleButton.find('.text').text('<%= t :show %>');
+          $toggleButton.find('i')
+              .removeClass('fa-angle-double-up')
+              .addClass('fa-angle-double-down');
+        }
+      });
+    });
+  </script>
+<% end %>

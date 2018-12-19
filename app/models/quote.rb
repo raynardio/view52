@@ -2,7 +2,7 @@
 #
 # Table name: quotes
 #
-#  id         :integer          not null, primary key
+#  id         :bigint(8)        not null, primary key
 #  quote_type :string
 #  text       :string
 #  created_at :datetime         not null

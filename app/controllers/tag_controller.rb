@@ -15,4 +15,15 @@ class TagController < ApplicationController
     tag = Tag.create!(attrs).attributes
     render json: { tag: tag }
   end
+
+  def destroy
+    tag = current_user.tags.where(
+        'item_type = ? AND label = ?',
+        params[:item_type],
+        params[:tag]).first
+
+    tag.destroy! unless tag.nil?
+
+    render json: { tag: tag }
+  end
 end
