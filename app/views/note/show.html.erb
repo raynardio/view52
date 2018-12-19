@@ -1,21 +1,137 @@
-<h4>
-  <%= @note.title %>
-</h4>
-
-<div>
-  Tags:
-  <% @note.tags.each do |tag| %>
-    <span><%= tag.label %></span>
-  <% end %>
+<div class="form-group">
+  <label for="edit-note-title">
+    <%= t :title %>
+  </label>
+  <input class="form-control" type="text" name="title" id="edit-note-title" value="<%= @note[:title] %>">
+</div>
+<div class="form-group">
+  <label for="edit-note-views"><%= t :views_parens %></label>
+  <input class="selectize" type="text" name="views" id="edit-note-views" value="<%= @note.views.map(&:label).join ' ' %>">
+</div>
+<div class="form-group">
+  <label for="edit-note-tags"><%= t :tags %></label>
+  <input id="edit-note-tags" class="selectize" type="text" name="tags" value="<%= @note.tags.map(&:label).join ' ' %>">
+</div>
+<div class="form-group">
+  <label for="edit-note-urls"><%= t :urls %></label>
+  <input class="selectize" type="text" name="urls" id="edit-note-urls">
+</div>
+<div class="form-group">
+  <label for="edit-note-content"><%= t :content %></label>
+  <textarea id="edit-note-content" class="form-control">
+    <%= @note.text %>
+  </textarea>
 </div>
 
-<div>
-  Views:
-  <% @note.views.each do |view| %>
-    <%= view.label %>
-  <% end %>
+<div class="buttons">
+  <button id="edit-note-submit" type="button" class="btn btn-primary">
+    <%= t :save %>
+  </button>
 </div>
 
-<div>
-  <%= @note.text.html_safe %>
+<div id="edit-note-status" style="display: none">
 </div>
+
+<%= content_for :footer do %>
+  <script>
+    $(() => {
+      const $note = $('#edit-note-content');
+      const $noteViews = $('#edit-note-views');
+      const $noteTags = $('#edit-note-tags');
+      const $noteUrls = $('#edit-note-urls');
+      const $noteTitle = $('#edit-note-title');
+      const $noteSubmit = $('#edit-note-submit');
+      const $noteStatus = $('#edit-note-status');
+      const csrfToken = $('meta[name="csrf-token"]').attr('content');
+
+
+      $noteSubmit.click(() => {
+        $noteSubmit.attr('disabled', true);
+        $.ajax({
+          url: '<%= note_path @note %>',
+          method: 'PUT',
+          beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', csrfToken)},
+          dataType: 'json',
+          data: {
+            title: $noteTitle.val(),
+            views: $noteViews.val(),
+            tags: $noteTags.val(),
+            note: $note.val()
+          },
+          success: res => {
+            $noteStatus.text('Saved!').show();
+            console.log(JSON.stringify(res));
+            $noteSubmit.attr('disabled', false);
+          },
+          error: err => {
+            $noteStatus.text('Whoops! Something went wrong :(').show();
+            console.error(`submit error: ${JSON.stringify(err)}`);
+            $noteSubmit.attr('disabled', false);
+          }
+        });
+      });
+
+      $noteUrls.selectize({
+        delimiter: ' ',
+        create: true
+      });
+
+      $noteViews.selectize({
+        delimiter: ' ',
+        loadThrottle: 100,
+        valueField: 'label',
+        labelField: 'label',
+        searchField: 'label',
+        load: (query, callback) => {
+          if (!query.length) return callback();
+          $.ajax({
+            url: `<%= autocomplete_views_path %>?q=${encodeURIComponent(query)}`,
+            method: 'GET',
+            error: () => {
+              console.error('selectize error!');
+              callback();
+            },
+            success: res => {
+              console.log(res);
+              callback(res);
+            }
+          });
+        }
+      });
+
+      $noteTags.selectize({
+        delimiter: ' ',
+        loadThrottle: 100,
+        valueField: 'label',
+        labelField: 'label',
+        searchField: 'label',
+        createOnBlur: true,
+        create: true,
+        // create: function(input) {
+        //   console.log(`Creating tag: ${input}`);
+        //   return {
+        //     value: input,
+        //     text: input
+        //   };
+        // },
+        load: (query, callback) => {
+          if (!query.length) return callback();
+          $.ajax({
+            url: `<%= autocomplete_tags_path %>?q=${encodeURIComponent(query)}`,
+            method: 'GET',
+            error: () => {
+              console.error('selectize error!');
+              callback();
+            },
+            success: res => {
+              console.log(res);
+              callback(res);
+            }
+          });
+        }
+      });
+
+      $note.summernote();
+    });
+  </script>
+<% end %>
