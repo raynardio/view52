@@ -1,14 +1,16 @@
 <div id="web-link-<%= link.id %>" class="web-link">
   <div class="card">
     <div class="card-body">
-      <div class="card-title row">
+      <i class="fa fa-external-link"></i>
+      <div class="card-title">
         <% unless link.favicon.nil? %>
-          <img class="favicon col-md-2" src="data:<%= link.favicon.content_type %>;base64, <%= link.favicon.base64 %>" />
+          <img class="favicon" src="data:<%= link.favicon.content_type %>;base64, <%= link.favicon.base64 %>" />
+        <% else %>
+          <span class="favicon">&nbsp;</span>
         <% end %>
-        <div class="col-md">
+        <span class="title-div">
           <span class="title"><%= link.title %></span>
-          <i class="fa fa-external-link pull-right"></i>
-        </div>
+        </span>
       </div>
       <div class="card-text"><%= link.description %></div>
     </div>

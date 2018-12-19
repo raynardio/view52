@@ -128,11 +128,15 @@ h1 {
 }
 
 .web-link {
-  width: 400px;
+  width: 350px;
 
-  img.favicon {
+  .favicon {
     width: 32px;
     height: 32px;
+  }
+
+  .card-text {
+    max-width: 300px;
   }
 
   cursor: pointer;
@@ -141,13 +145,20 @@ h1 {
     background: #fbfbfb;
   }
 
-  .title {
+  .card-title {
     font-weight: bold;
     font-size: large;
+    width: 260px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
-  i.fa-external-link {
+  .fa-external-link {
     font-size: 2em;
+    position: absolute;
+    right: 0.5em;
+    top: 0.5em;
   }
 }
 
@@ -177,5 +188,10 @@ h1 {
     h5 {
       font-weight: bold;
     }
+  }
+
+  .link-card {
+    margin-left: 5px;
+    margin-bottom: 5px;
   }
 }

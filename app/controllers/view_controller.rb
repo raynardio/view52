@@ -10,6 +10,10 @@ class ViewController < ApplicationController
         label: params[:id].capitalize,
         long_term_goals: current_user.goals.where(term: 'long', role_category_id: params[:id]).all,
         short_term_goals: current_user.goals.where(term: 'short', role_category_id: params[:id]).all,
+        notes: current_user.views
+             .includes(:item)
+             .where(item_type: 'Note', label: 'intellectual')
+             .map(&:item),
         web_links: current_user.views
              .includes(:item)
              .where(label: params[:id], item_type: 'WebLink')
