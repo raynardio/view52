@@ -98,3 +98,6 @@ en:
   urls: "URLs"
   show: "Show"
   hide: "Hide"
+  notes: "Notes"
+  links: "Links"
+  todo: "TODO"

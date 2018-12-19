@@ -1,6 +1,10 @@
 class WebLinkController < ApplicationController
   before_action :authenticate_user!
 
+  def index
+    @links = current_user.web_links.all
+  end
+
   def create
     url = URI.parse(URI.encode(params[:url]))
     p "URL #{url}"

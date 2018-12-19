@@ -2,16 +2,15 @@
   <div class="card">
     <div class="card-body">
       <div class="card-title row">
-        <% unless @link.favicon.nil? %>
-          <img class="favicon col-md-2" src="data:<%= @link.favicon.content_type %>;base64, <%= @link.favicon.base64 %>" />
+        <% unless link.favicon.nil? %>
+          <img class="favicon col-md-2" src="data:<%= link.favicon.content_type %>;base64, <%= link.favicon.base64 %>" />
         <% end %>
-<!--        <a class="col-md" href="<%#= @link.url %>"><%#= @link[:title] %></a>-->
         <div class="col-md">
-          <span class="title"><%= @link.title %></span>
+          <span class="title"><%= link.title %></span>
           <i class="fa fa-external-link pull-right"></i>
         </div>
       </div>
-      <div class="card-text"><%= @link[:description] %></div>
+      <div class="card-text"><%= link.description %></div>
     </div>
   </div>
 </div>
@@ -20,7 +19,7 @@
   <script>
     $(() => {
       $('.web-link').click(() => {
-        window.open('<%= @link.url %>');
+        window.open('<%= link.url %>');
       });
     });
   </script>

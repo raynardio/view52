@@ -1,0 +1,5 @@
+<div class="row">
+  <% @links.each do |link| %>
+    <%= render partial: 'layouts/web_link_card', locals: { link: link } %>
+  <% end %>
+</div>

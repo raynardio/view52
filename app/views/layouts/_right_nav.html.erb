@@ -8,7 +8,7 @@
       </li>
       <li class="nav-item ">
         <a class="nav-link" href="#todo-list" role="tab" data-toggle="tab">
-          <span>Todo</span>
+          <span><%= t :todo %></span>
         </a>
       </li>
       <li class="panel-close">
@@ -36,92 +36,98 @@
                 <div class="col-sm-12">
                   <div class="row">
                     <div class="col-sm-4 col-xs-4 border right">
-                      <div class="pdd-vertical-10">
-                        <span class="font-size-18 text-dark">18</span>
-                        <small>Projects</small>
-                      </div>
+                      <a href="<%= note_index_path %>">
+                        <div class="pdd-vertical-10">
+                          <div class="font-size-18"><%= current_user.notes.count %></div>
+                          <small><%= t :notes %></small>
+                        </div>
+                      </a>
                     </div>
                     <div class="col-sm-4 col-xs-4 border right">
                       <div class="pdd-vertical-10">
-                        <span class="font-size-18 text-dark">1,362</span>
-                        <small>Followers</small>
+                        <div class="font-size-18 text-dark"><%= current_user.tags.count %></div>
+                        <small><%= t :tags %></small>
                       </div>
                     </div>
                     <div class="col-sm-4 col-xs-4">
-                      <div class="pdd-vertical-10">
-                        <span class="font-size-18 text-dark">362</span>
-                        <small>Points</small>
-                      </div>
+                      <a href="<%= web_link_index_path %>">
+                        <div class="pdd-vertical-10">
+                          <div class="font-size-18">
+                            <%= current_user.web_links.count %>
+                          </div>
+                          <small><%= t :links %></small>
+                        </div>
+                      </a>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          <div class="pdd-horizon-20 pdd-top-20">
-            <div class="border bottom">
-              <h5 class="text-dark mrg-btm-20">Quick Tools</h5>
-              <ul class="list-unstyled list-link font-size-16 pdd-btm-20">
-                <li>
-                  <a href="">
-                    <i class="ti-user pdd-right-10"></i>
-                    <span>Friend Request</span>
-                    <span class="label label-info mrg-left-5">2</span>
-                  </a>
-                </li>
-                <li>
-                  <a href="">
-                    <i class="ti-book pdd-right-10"></i>
-                    <span>Inbox</span>
-                    <span class="label label-warning mrg-left-5">8</span>
-                  </a>
-                </li>
-                <li>
-                  <a href="">
-                    <i class="ti-settings pdd-right-10"></i>
-                    <span>Settings</span>
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </div>
-          <div class="padding-20">
-            <h5 class="text-dark mrg-btm-20">Recent</h5>
-            <ul class="list-unstyled list-info">
-              <li>
-                <a href="">
-                  <img class="thumb-img" src="/assets/avatars/thumb-1.jpg" alt="">
-                  <div class="info">
-                    <span class="title">Jordan Hurst</span>
-                    <span class="sub-title">have send you a request</span>
-                    <span class="float-object">8m</span>
-                  </div>
-                </a>
-              </li>
-              <li>
-                <a href="">
-                  <img class="thumb-img" src="/assets/avatars/thumb-4.jpg" alt="">
-                  <div class="info">
-                    <span class="title">Samuel Field</span>
-                    <span class="sub-title">have send you a request</span>
-                    <span class="float-object">7d</span>
-                  </div>
-                </a>
-              </li>
-              <li>
-                <a href="">
-                                                  <span class="thumb-img bg-info text-center font-size-25 font-secondary">
-                                                          <span class="text-white">E</span>
-                                                  </span>
-                  <div class="info">
-                    <span class="title">Espire</span>
-                    <span class="sub-title">Welcome on Board</span>
-                    <span class="float-object">7d</span>
-                  </div>
-                </a>
-              </li>
-            </ul>
-          </div>
+<!--          <div class="pdd-horizon-20 pdd-top-20">-->
+<!--            <div class="border bottom">-->
+<!--              <h5 class="text-dark mrg-btm-20">Quick Tools</h5>-->
+<!--              <ul class="list-unstyled list-link font-size-16 pdd-btm-20">-->
+<!--                <li>-->
+<!--                  <a href="">-->
+<!--                    <i class="ti-user pdd-right-10"></i>-->
+<!--                    <span>Friend Request</span>-->
+<!--                    <span class="label label-info mrg-left-5">2</span>-->
+<!--                  </a>-->
+<!--                </li>-->
+<!--                <li>-->
+<!--                  <a href="">-->
+<!--                    <i class="ti-book pdd-right-10"></i>-->
+<!--                    <span>Inbox</span>-->
+<!--                    <span class="label label-warning mrg-left-5">8</span>-->
+<!--                  </a>-->
+<!--                </li>-->
+<!--                <li>-->
+<!--                  <a href="">-->
+<!--                    <i class="ti-settings pdd-right-10"></i>-->
+<!--                    <span>Settings</span>-->
+<!--                  </a>-->
+<!--                </li>-->
+<!--              </ul>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--          <div class="padding-20">-->
+<!--            <h5 class="text-dark mrg-btm-20">Recent</h5>-->
+<!--            <ul class="list-unstyled list-info">-->
+<!--              <li>-->
+<!--                <a href="">-->
+<!--                  <img class="thumb-img" src="/assets/avatars/thumb-1.jpg" alt="">-->
+<!--                  <div class="info">-->
+<!--                    <span class="title">Jordan Hurst</span>-->
+<!--                    <span class="sub-title">have send you a request</span>-->
+<!--                    <span class="float-object">8m</span>-->
+<!--                  </div>-->
+<!--                </a>-->
+<!--              </li>-->
+<!--              <li>-->
+<!--                <a href="">-->
+<!--                  <img class="thumb-img" src="/assets/avatars/thumb-4.jpg" alt="">-->
+<!--                  <div class="info">-->
+<!--                    <span class="title">Samuel Field</span>-->
+<!--                    <span class="sub-title">have send you a request</span>-->
+<!--                    <span class="float-object">7d</span>-->
+<!--                  </div>-->
+<!--                </a>-->
+<!--              </li>-->
+<!--              <li>-->
+<!--                <a href="">-->
+<!--                                                  <span class="thumb-img bg-info text-center font-size-25 font-secondary">-->
+<!--                                                          <span class="text-white">E</span>-->
+<!--                                                  </span>-->
+<!--                  <div class="info">-->
+<!--                    <span class="title">Espire</span>-->
+<!--                    <span class="sub-title">Welcome on Board</span>-->
+<!--                    <span class="float-object">7d</span>-->
+<!--                  </div>-->
+<!--                </a>-->
+<!--              </li>-->
+<!--            </ul>-->
+<!--          </div>-->
         </div>
       </div>
       <!-- profile END -->
