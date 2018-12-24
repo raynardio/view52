@@ -90,6 +90,6 @@ class User < ApplicationRecord
   end
 
   def formatted_dob
-    date_of_birth.strftime('%Y-%m-%d') rescue ''
+    date_of_birth.strftime('%m/%d/%Y') rescue ''
   end
 end

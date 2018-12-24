@@ -173,7 +173,7 @@ $(() => {
     header: { center: 'month,year' },
     views: {
       month: {
-        titleFormat: 'YYYY-MM-DD'
+        titleFormat: 'MM/DD/YYYY'
       }
     }
   });
