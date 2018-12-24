@@ -12,7 +12,7 @@ class ViewController < ApplicationController
         short_term_goals: current_user.goals.where(term: 'short', role_category_id: params[:id]).all,
         notes: current_user.views
              .includes(:item)
-             .where(item_type: 'Note', label: 'intellectual')
+             .where(item_type: 'Note', label: params[:id])
              .map(&:item),
         web_links: current_user.views
              .includes(:item)

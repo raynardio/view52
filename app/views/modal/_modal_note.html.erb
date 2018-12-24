@@ -12,25 +12,68 @@
         </div>
         <div class="modal-body">
           <div class="form-group">
-            <label for="note-title">
-              <%= t :title %>
-            </label>
-            <input class="form-control" type="text" name="title" id="note-title">
+<!--            <label for="note-title">-->
+              <%#= t :title %>
+<!--            </label>-->
+            <input class="form-control" type="text" name="title" id="note-title" placeholder="<%= t :title %>...">
+          </div>
+          <div class="row">
+            <div class="col-md">
+              <div class="form-group">
+                <select id="primary-view-select" name="primary_view" class="form-control selectize">
+                  <option selected disabled data-placeholder="true"><%= t :primary_view %>...</option>
+                  <% RoleCategory.all.find_each do |role_category| %>
+                    <option value="<%= role_category.id %>"><%= role_category.short_name %></option>
+                  <% end %>
+                </select>
+              </div>
+            </div>
+            <div class="col-md">
+              <div class="form-group">
+                <select id="secondary-view-select" name="secondary_view" class="form-control selectize">
+                  <option selected disabled data-placeholder="true"><%= t :secondary_view %>...</option>
+                  <% RoleCategory.all.find_each do |role_category| %>
+                    <option value="<%= role_category.id %>"><%= role_category.short_name %></option>
+                  <% end %>
+                </select>
+              </div>
+            </div>
+            <div class="col-md">
+              <div class="form-group">
+                <select class="form-control" name="note_type" id="note-type">
+                  <option selected disabled data-placholder="true"><%= t :note_type %>...</option>
+                  <% Note::TYPES.each do |note_type| %>
+                    <option value="<%= note_type %>"><%= note_type %></option>
+                  <% end %>
+                </select>
+              </div>
+            </div>
+            <div class="col-md">
+              <div class="form-group">
+                <select class="form-control" name="learning_type" id="learning-type">
+                  <option selected disabled data-placholder="true"><%= t :learning_type %>...</option>
+                  <% LearningType::TYPES.each do |learning_type| %>
+                    <option value="<%= learning_type %>"><%= learning_type %></option>
+                  <% end %>
+                </select>
+              </div>
+            </div>
           </div>
           <div class="form-group">
-            <label for="note-views"><%= t :views_parens %></label>
-            <input class="selectize" type="text" name="views" id="note-views">
+            <div class="form-group">
+              <!--                <label for="note-tags"><%#= t :tags %></label>-->
+              <input id="note-tags" class="selectize" type="text" name="tags">
+            </div>
           </div>
+<!--          <div class="form-group">-->
+<!--            <label for="note-views"><%#= t :urls %></label>-->
+<!--            <input class="selectize" type="text" name="urls" id="note-urls">-->
+<!--          </div>-->
           <div class="form-group">
-            <label for="note-tags"><%= t :tags %></label>
-            <input id="note-tags" class="selectize" type="text" name="tags">
-          </div>
-          <div class="form-group">
-            <label for="note-views"><%= t :urls %></label>
-            <input class="selectize" type="text" name="urls" id="note-urls">
-          </div>
-          <div class="form-group">
-            <label for="note-content"><%= t :content %></label>
+<!--            <label for="note-content"><%#= t :content %></label>-->
+<!--            <div>-->
+<!--              <a class="toggle-controls" href="#">Toggle Controls</a>-->
+<!--            </div>-->
             <textarea id="note-content" class="form-control"></textarea>
           </div>
         </div>
@@ -57,12 +100,15 @@
       $noteModalContent.html($noteTemplate.html());
 
       const $note = $('#note-content');
-      const $noteViews = $('#note-views');
+      const $primaryView = $('#primary-view-select');
+      const $secondaryView = $('#secondary-view-select');
+      const $noteType = $('#note-type');
       const $noteTags = $('#note-tags');
-      const $noteUrls = $('#note-urls');
       const $noteModal = $('#modal-note');
       const $noteTitle = $('#note-title');
       const $noteSubmit = $('#note-submit');
+      const $learningType = $('#learning-type');
+      const $toggleControls = $noteModal.find('.toggle-controls');
       const csrfToken = $('meta[name="csrf-token"]').attr('content');
 
 
@@ -75,9 +121,13 @@
           dataType: 'json',
           data: {
             title: $noteTitle.val(),
-            views: $noteViews.val(),
+            view: $primaryView.val(),
             tags: $noteTags.val(),
-            note: $note.val()
+            note: $note.val(),
+            primary_view: $primaryView.val(),
+            secondary_view: $secondaryView.val(),
+            note_type: $noteType.val(),
+            learning_type: $learningType.val()
           },
           success: () => {
             $noteModal.modal('hide');
@@ -93,33 +143,33 @@
         setTimeout(() => { $noteTitle.focus(); }, 500);
       });
 
-      $noteUrls.selectize({
-        delimiter: ' ',
-        create: true
-      });
+      // $noteUrls.selectize({
+      //   delimiter: ' ',
+      //   create: true
+      // });
 
-      $noteViews.selectize({
-        delimiter: ' ',
-        loadThrottle: 100,
-        valueField: 'label',
-        labelField: 'label',
-        searchField: 'label',
-        load: (query, callback) => {
-          if (!query.length) return callback();
-          $.ajax({
-            url: `<%= autocomplete_views_path %>?q=${encodeURIComponent(query)}`,
-            method: 'GET',
-            error: () => {
-              console.error('selectize error!');
-              callback();
-            },
-            success: res => {
-              console.log(res);
-              callback(res);
-            }
-          });
-        }
-      });
+<!--      $noteView.selectize({-->
+<!--        delimiter: ' ',-->
+<!--        loadThrottle: 100,-->
+<!--        valueField: 'label',-->
+<!--        labelField: 'label',-->
+<!--        searchField: 'label',-->
+<!--        load: (query, callback) => {-->
+<!--          if (!query.length) return callback();-->
+<!--          $.ajax({-->
+<!--            url: `<%= autocomplete_views_path %>?q=${encodeURIComponent(query)}`,-->
+<!--            method: 'GET',-->
+<!--            error: () => {-->
+<!--              console.error('selectize error!');-->
+<!--              callback();-->
+<!--            },-->
+<!--            success: res => {-->
+<!--              console.log(res);-->
+<!--              callback(res);-->
+<!--            }-->
+<!--          });-->
+<!--        }-->
+<!--      });-->
 
       $noteTags.selectize({
         delimiter: ' ',
@@ -129,6 +179,7 @@
         searchField: 'label',
         createOnBlur: true,
         create: true,
+        placeholder: '<%= t :tags %>...',
         // create: function(input) {
         //   console.log(`Creating tag: ${input}`);
         //   return {
@@ -153,7 +204,38 @@
         }
       });
 
-      $note.summernote();
+      // $note.summernote();
+
+      $note.summernote({
+        height: 200,
+        width: '100%',
+        toolbar: [['style', ['bold', 'italic', 'underline', 'clear']],
+          ['font', ['strikethrough', 'superscript', 'subscript']],
+          ['fontsize', ['fontsize']],
+          ['color', ['color']],
+          ['para', ['ul', 'ol', 'paragraph']],
+          ['height', ['height']]]
+      });
+
+    //   $toggleControls.click(function () {
+    //     const enabled = !$(this).attr('data-enabled');
+    //     $(this).attr('data-enabled', enabled || null);
+    //     if (enabled) {
+    //       $note.summernote({
+    //         height: 200,
+    //         width: '100%',
+    //         toolbar: [['style', ['bold', 'italic', 'underline', 'clear']],
+    //           ['font', ['strikethrough', 'superscript', 'subscript']],
+    //           ['fontsize', ['fontsize']],
+    //           ['color', ['color']],
+    //           ['para', ['ul', 'ol', 'paragraph']],
+    //           ['height', ['height']]]
+    //       });
+    //     } else {
+    //       // $note.summernote({ toolbar: [] });
+    //     }
+    //     return false;
+    //   });
     }
 
     $(() => {

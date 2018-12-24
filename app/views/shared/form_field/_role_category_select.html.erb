@@ -1,0 +1,9 @@
+<!--<div class="form-group">-->
+<!--  <label for="role-category-select"><%#= t :view %></label>-->
+  <select id="role-category-select" name="role_category" class="form-control selectize">
+    <option selected disabled data-placeholder="true"><%= t :view_ellipsis %></option>
+    <% RoleCategory.all.find_each do |role_category| %>
+      <option value="<%= role_category.id %>"><%= role_category.short_name %></option>
+    <% end %>
+  </select>
+<!--</div>-->

@@ -8,6 +8,7 @@
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #  title      :string
+#  note_type  :string
 #
 # Indexes
 #
@@ -16,7 +17,10 @@
 #
 
 class Note < ApplicationRecord
+  TYPES = %w(Note Resource TODO Journal)
+
   belongs_to :user
-  has_many :tags, as: :item
-  has_many :views, as: :item
+  has_many :tags, as: :item, dependent: :destroy
+  has_many :views, as: :item, dependent: :destroy
+  has_many :learning_types, as: :item, dependent: :destroy
 end

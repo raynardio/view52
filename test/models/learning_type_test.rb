@@ -1,24 +1,19 @@
 # == Schema Information
 #
-# Table name: notes
+# Table name: learning_types
 #
 #  id         :bigint(8)        not null, primary key
+#  label      :string
 #  user_id    :integer
-#  text       :string
+#  item_type  :string
+#  item_id    :integer
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
-#  title      :string
-#  note_type  :string
-#
-# Indexes
-#
-#  index_notes_on_title    (title)
-#  index_notes_on_user_id  (user_id)
 #
 
 require 'test_helper'
 
-class NoteTest < ActiveSupport::TestCase
+class LearningTypeTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

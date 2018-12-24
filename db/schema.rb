@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_17_011848) do
+ActiveRecord::Schema.define(version: 2018_12_24_031851) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -50,12 +50,22 @@ ActiveRecord::Schema.define(version: 2018_12_17_011848) do
     t.string "base64"
   end
 
+  create_table "learning_types", force: :cascade do |t|
+    t.string "label"
+    t.integer "user_id"
+    t.string "item_type"
+    t.integer "item_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "notes", force: :cascade do |t|
     t.integer "user_id"
     t.string "text"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "title"
+    t.string "note_type"
     t.index ["title"], name: "index_notes_on_title"
     t.index ["user_id"], name: "index_notes_on_user_id"
   end

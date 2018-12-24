@@ -87,7 +87,7 @@ h1 {
   position: fixed;
   right: 2em;
   bottom: 2em;
-  z-index: 99999;
+  z-index: 1040;
 
   span {
     display: list-item;
@@ -193,5 +193,16 @@ h1 {
   .link-card {
     margin-left: 5px;
     margin-bottom: 5px;
+  }
+}
+
+::placeholder {
+  color: #aaa !important;
+  opacity: 1 !important;
+}
+
+#modal-note {
+  .toggle-controls {
+    font-size: 12px;
   }
 }

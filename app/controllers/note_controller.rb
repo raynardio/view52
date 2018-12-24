@@ -8,14 +8,13 @@ class NoteController < ApplicationController
   def create
     p params
     tags = params[:tags] && params[:tags].split || []
-    views = params[:views] && params[:views].split || []
 
     p tags
-    p views
 
     note = current_user.notes.new({
       text: params[:note],
-      title: params[:title]
+      title: params[:title],
+      note_type: params[:primary_note_type]
     })
     note.save!
 
@@ -26,12 +25,29 @@ class NoteController < ApplicationController
       })
     end
 
-    views.each do |view|
+    note.views.create!({
+        user_id: current_user.id,
+        label: params[:primary_view]
+    })
+
+    if params[:secondary_view]
       note.views.create!({
         user_id: current_user.id,
-        label: view
+        label: params[:secondary_view]
       })
     end
+
+    note.learning_types.create!({
+        user_id: current_user.id,
+        label: params[:learning_type]
+    })
+
+    # views.each do |view|
+    #   note.views.create!({
+    #     user_id: current_user.id,
+    #     label: view
+    #   })
+    # end
     render json: { error: false }
   end
 
@@ -47,7 +63,8 @@ class NoteController < ApplicationController
       note.views.destroy_all
       note.update_attributes!({
         text: permitted_params[:note],
-        title: permitted_params[:title]
+        title: permitted_params[:title],
+        note_type: permitted_params[:primary_note_type]
       })
       tags.each do |tag|
         note.tags.create!({user_id: current_user.id, label: tag})
@@ -68,6 +85,6 @@ class NoteController < ApplicationController
   private
 
   def permitted_params
-    params.permit :title, :note
+    params.permit :title, :note, :primary_view, :secondary_view, :note_type, :learning_type
   end
 end
