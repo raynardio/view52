@@ -25,14 +25,14 @@ class NoteController < ApplicationController
       })
     end
 
-    if params[:primary_view]
+    unless params[:primary_view].empty?
       note.views.create!({
           user_id: current_user.id,
           label: params[:primary_view]
       })
     end
 
-    if params[:secondary_view]
+    unless params[:secondary_view].empty?
       note.views.create!({
         user_id: current_user.id,
         label: params[:secondary_view]

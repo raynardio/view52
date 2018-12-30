@@ -11,7 +11,7 @@ class GoalController < ApplicationController
       description: params[:description]
     })
 
-    if params[:view]
+    unless params[:view].empty?
       goal.views.create!({
         user_id: current_user.id,
         label: params[:view]
