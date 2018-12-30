@@ -9,6 +9,8 @@
 #  text             :string
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
+#  description      :text
+#  goal_date        :date
 #
 # Indexes
 #
@@ -19,11 +21,11 @@ class Goal < ApplicationRecord
   TERMS = %w(long short)
 
   validates :user_id, presence: true
-  validates :role_category_id, presence: true
-  validates :text, presence: true
 
-  belongs_to  :user
-  belongs_to :role_category
+  belongs_to :user
+  # belongs_to :role_category
+  has_many :views, as: :item, dependent: :destroy
+  has_many :tags, as: :item, dependent: :destroy
 
   def to_s
     I18n.t("goal_description.#{term}", category: role_category_id.capitalize) + ': ' + text

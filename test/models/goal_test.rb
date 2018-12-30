@@ -9,6 +9,8 @@
 #  text             :string
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
+#  description      :text
+#  goal_date        :date
 #
 # Indexes
 #

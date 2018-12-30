@@ -20,4 +20,5 @@ Rails.application.routes.draw do
   resources :view, only: [:show, :index]
   post '/view', to: 'view#create'
   delete '/view', to: 'view#destroy'
+  resources :goal
 end

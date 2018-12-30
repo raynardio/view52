@@ -6,10 +6,16 @@ class ViewController < ApplicationController
   end
 
   def show
+    goals_by_view = current_user.views
+        .includes(:item)
+        .where({ item_type: 'Goal', label: params[:id] })
+        .map(&:item)
     @view = {
         label: params[:id].capitalize,
-        long_term_goals: current_user.goals.where(term: 'long', role_category_id: params[:id]).all,
-        short_term_goals: current_user.goals.where(term: 'short', role_category_id: params[:id]).all,
+        long_term_goals: current_user.goals.where(term: 'long', role_category_id: params[:id]).all +
+            goals_by_view.select { |g| g.term == 'long' },
+        short_term_goals: current_user.goals.where(term: 'short', role_category_id: params[:id]).all +
+            goals_by_view.select { |g| g.term == 'short' },
         notes: current_user.views
              .includes(:item)
              .where(item_type: 'Note', label: params[:id])

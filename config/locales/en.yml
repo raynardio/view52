@@ -115,3 +115,7 @@ en:
   learning_type: "Learning Type"
   primary_view: "Primary View"
   secondary_view: "Secondary View"
+  new_goal: "New Goal"
+  short_term: "Short Term"
+  long_term: "Long Term"
+  goal_time_frame: "Goal Time Frame"

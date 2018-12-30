@@ -25,10 +25,12 @@ class NoteController < ApplicationController
       })
     end
 
-    note.views.create!({
-        user_id: current_user.id,
-        label: params[:primary_view]
-    })
+    if params[:primary_view]
+      note.views.create!({
+          user_id: current_user.id,
+          label: params[:primary_view]
+      })
+    end
 
     if params[:secondary_view]
       note.views.create!({
