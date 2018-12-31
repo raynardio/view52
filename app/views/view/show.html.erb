@@ -72,4 +72,24 @@
       </div>
     </div>
   </div>
+
+  <div class="card">
+    <div class="card-header" id="life-event-header" data-toggle="collapse" data-target="#life-event-content">
+      <h5 class="mb-0">
+        <%= "#{t :life_events} (#{@view[:life_events].count})" %>
+      </h5>
+    </div>
+
+    <div id="life-event-content" class="collapse" aria-labelledby="life-event-header" data-parent="#view-accordion">
+      <div class="card-body">
+        <div class="row">
+          <% @view[:life_events].each do |event| %>
+            <div>
+              <%= event.title %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

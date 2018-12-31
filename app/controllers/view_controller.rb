@@ -23,7 +23,12 @@ class ViewController < ApplicationController
         web_links: current_user.views
              .includes(:item)
              .where(label: params[:id], item_type: 'WebLink')
-             .map(&:item)
+             .map(&:item),
+        life_events: current_user.views
+           .includes(:item)
+           .where(label: params[:id], item_type: 'LifeEvent')
+           .map(&:item)
+
     }
   end
 
