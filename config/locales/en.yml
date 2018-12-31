@@ -119,3 +119,7 @@ en:
   short_term: "Short Term"
   long_term: "Long Term"
   goal_time_frame: "Goal Time Frame"
+  new_life_event: "New Life Event"
+  from: "From"
+  to: "To"
+  url: "URL"

@@ -1,0 +1,2 @@
+module LifeEventHelper
+end

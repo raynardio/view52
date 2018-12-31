@@ -1,0 +1,136 @@
+<script type="template" id="life-event-modal-template">
+  <div id="modal-life-event" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">
+            <%= t :new_life_event %>
+          </h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <input type="text" name="title" class="form-control" placeholder="<%= t :life_event %>...">
+          </div>
+          <div class="form-group">
+            <input type="text" name="url" class="form-control" placeholder="<%= t :url %>...">
+          </div>
+          <div class="row">
+            <div class="col-md">
+              <div class="form-group">
+                <input type="text" name="from_date" class="form-control datepicker-orient-bottom" data-provide="datepicker" placeholder="<%= t :from %>...">
+              </div>
+            </div>
+            <div class="col-md">
+              <div class="form-group">
+                <input type="text" name="to_date" class="form-control datepicker-orient-bottom" data-provide="datepicker" placeholder="<%= t :to %>...">
+              </div>
+            </div>
+            <div class="col-md">
+              <div class="form-group">
+                <select name="view" class="form-control">
+                  <option selected disabled data-placeholder="true"><%= t :view %>...</option>
+                  <% RoleCategory.all.find_each do |role_category| %>
+                    <option value="<%= role_category.id %>"><%= role_category.short_name %></option>
+                  <% end %>
+                </select>
+              </div>
+            </div>
+            <div class="col-md">
+              <div class="form-group">
+                <select name="secondary_view" class="form-control">
+                  <option selected disabled data-placeholder="true"><%= t :secondary_view %>...</option>
+                  <% RoleCategory.all.find_each do |role_category| %>
+                    <option value="<%= role_category.id %>"><%= role_category.short_name %></option>
+                  <% end %>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <textarea name="description" class="form-control"></textarea>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">
+            <%= t :close %>
+          </button>
+          <button type="button" class="btn btn-primary" name="save"><%= t :save %></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</script>
+
+<div id="life-event-modal-content"></div>
+
+<%= content_for :footer do %>
+  <script>
+    function initLifeEventModal() {
+      const calendarOptions = {
+        header: { center: 'month,year' },
+        views: { month: { titleFormat: 'MM/DD/YYYY' } }
+      };
+
+      const $lifeEventModalTemplate = $('#life-event-modal-template');
+      const $lifeEventContent = $('#life-event-modal-content');
+      $lifeEventContent.html($lifeEventModalTemplate.html());
+
+      const $lifeEventModal = $('#modal-life-event');
+      const $title = $('#modal-life-event input[name=title]');
+      const $url = $('#modal-life-event input[name=url]');
+      const $fromDate = $('#modal-life-event input[name=from_date]');
+      const $toDate = $('#modal-life-event input[name=to_date]');
+      const $view = $('#modal-life-event select[name=view]');
+      const $secondaryView = $('#modal-life-event select[name=secondary_view]');
+      const $description = $('#modal-life-event textarea[name=description]');
+      const $save = $('#modal-life-event button[name=save]');
+
+      $fromDate.fullCalendar(calendarOptions);
+      $toDate.fullCalendar(calendarOptions);
+
+      $description.summernote({
+        height: 200,
+        width: '100%',
+        toolbar: [['style', ['bold', 'italic', 'underline', 'clear']],
+          ['font', ['strikethrough', 'superscript', 'subscript']],
+          ['fontsize', ['fontsize']],
+          ['color', ['color']],
+          ['para', ['ul', 'ol', 'paragraph']],
+          ['height', ['height']]]
+      });
+
+      $lifeEventModal.on('show.bs.modal', () => {
+        setTimeout(() => { $title.focus(); }, 500);
+      });
+
+      $save.click(function() {
+        $save.attr('disabled', true);
+        ajax({
+          url: '<%= life_event_index_url %>',
+          method: 'POST',
+          dataType: 'json',
+          data: {
+            title: $title.val(),
+            from_date: $fromDate.val(),
+            to_date: $toDate.val(),
+            view: $view.val(),
+            secondary_view: $secondaryView.val(),
+            description: $description.val(),
+            url: $url.val()
+          },
+          success: event => {
+            console.log(JSON.stringify(event));
+            $lifeEventModal.modal('hide');
+          },
+          error: err => {
+            console.error(err);
+            $save.attr('disabled', false);
+          }
+        });
+      });
+    }
+  </script>
+<% end %>

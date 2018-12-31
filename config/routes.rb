@@ -21,4 +21,5 @@ Rails.application.routes.draw do
   post '/view', to: 'view#create'
   delete '/view', to: 'view#destroy'
   resources :goal
+  resources :life_event
 end

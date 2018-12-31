@@ -24,5 +24,7 @@ class GoalController < ApplicationController
         label: tag
       })
     end
+
+    render json: goal
   end
 end
