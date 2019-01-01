@@ -1,5 +1,3 @@
-<% @notes.each do |note| %>
-  <div>
-    <a href="<%= url_for note %>"><%= note.title %></a>
-  </div>
-<% end %>
+<h1 class="text-center"><%= t :notes %></h1>
+
+<%= render partial: 'note/table', locals: { notes: @notes } %>

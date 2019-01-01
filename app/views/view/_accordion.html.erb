@@ -42,11 +42,12 @@
 
     <div id="notes-content" class="collapse" aria-labelledby="notes-header" data-parent="#view-accordion">
       <div class="card-body">
-        <% @view[:notes].each do |note| %>
-          <div>
-            <a href="<%= url_for note %>"><%= note.title %></a>
-          </div>
-        <% end %>
+        <%= render partial: 'note/table', locals: { notes: @view[:notes] } %>
+        <%# @view[:notes].each do |note| %>
+<!--          <div>-->
+<!--            <a href="<%#= url_for note %>"><%#= note.title %></a>-->
+<!--          </div>-->
+        <%# end %>
       </div>
     </div>
   </div>

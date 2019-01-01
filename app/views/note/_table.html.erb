@@ -1,0 +1,24 @@
+<table class="table table-striped">
+  <thead>
+  <th><%= t :title %></th>
+  <th><%= t :views %></th>
+  <th><%= t :tags %></th>
+  <!--    <th><%#= t :content %></th>-->
+  </thead>
+  <% notes.each do |note| %>
+    <tr>
+      <td>
+        <a href="<%= url_for note %>"><%= note.title %></a>
+      </td>
+      <td>
+        <%= note.views.map(&:short_name).join ', ' %>
+      </td>
+      <td>
+        <%= note.tags.map(&:label).join ', ' %>
+      </td>
+      <!--      <td>-->
+      <%#= note.text.html_safe %>
+      <!--      </td>-->
+    </tr>
+  <% end %>
+</table>

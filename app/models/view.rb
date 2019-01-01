@@ -14,4 +14,8 @@
 class View < ApplicationRecord
   belongs_to :user
   belongs_to :item, polymorphic: true
+
+  def short_name
+    self.label.capitalize
+  end
 end
