@@ -51,3 +51,4 @@
 //= require perfect-scrollbar/js/perfect-scrollbar.jquery
 //= require @material/ripple/dist/mdc.ripple.min
 //= require tribute
+//= require underscore

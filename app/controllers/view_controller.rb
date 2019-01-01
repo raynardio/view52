@@ -30,6 +30,17 @@ class ViewController < ApplicationController
            .map(&:item)
 
     }
+    @today = Date.today
+    @annual_dates = []
+    @life_events = {}
+    (0..9).each do |x|
+      @annual_dates << []
+      (0..9).each do |y|
+        date = current_user.date_of_birth + ((x * 10) + y).years
+        @annual_dates[x] << date
+        @life_events[date.year] = @view[:life_events].select { |e| e.date_in_range? date }
+      end
+    end
   end
 
   def create

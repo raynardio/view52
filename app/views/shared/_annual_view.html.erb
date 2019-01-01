@@ -1,17 +1,28 @@
 <div id="annual-view">
   <div class="hide-lt-768">
-    <div class="row">
-<!--      <div class="col-md"></div>-->
-      <% (1..10).each do |num| %>
-        <div class="col-md text-center"><%= num %></div>
-      <% end %>
-    </div>
+<!--    <div class="row">-->
+      <%# (1..10).each do |num| %>
+<!--        <div class="col-md text-center"><%#= num %></div>-->
+      <%# end %>
+<!--    </div>-->
     <% @annual_dates.each_with_index do |row, num| %>
       <div class="row">
-<!--        <div class="col-md"><%#= num + 1 %></div>-->
-        <span style="vertical-align: middle; display: table-cell"><%= num + 1 %></span>
+<!--        <span style="vertical-align: middle; display: table-cell"><%#= num + 1 %></span>-->
         <% row.each do |date| %>
-          <a href="<%= url_for controller: :calendar, view: 'listYear', year: date.year %>" class="year col-md">
+          <a href="<%= url_for controller: :calendar, view: 'listYear', year: date.year %>" class="year col-md" data-year="<%= date.year %>">
+            <% if @life_events && @life_events[date.year].present? %>
+              <% life_event = @life_events[date.year].last %>
+              <% link = life_event.web_links.last %>
+              <% if link %>
+                <div class="heading">
+                  <%= date.strftime '%Y' %> - Age
+                  <%= date.year - current_user.date_of_birth.year %>
+                </div>
+                <div class="content">
+                  <img src="data:<%= link.favicon.content_type %>;base64, <%= link.favicon.base64 %>" />
+                </div>
+              <% end %>
+            <% end %>
             <% if @today.year == date.year %>
               <div class="heading">
                 <%= date.strftime '%Y' %> - Age
@@ -31,3 +42,50 @@
     <%= render partial: 'shared/small_calendar' %>
   </div>
 </div>
+
+<script type="template" id="year-popover-template">
+  <div>
+    <strong><%= t :life_events %></strong>
+    <ul>
+    {{ _.each(lifeEvents, lifeEvent => { }}
+      <li>{{= lifeEvent.title }}</li>
+    {{ }); }}
+    </ul>
+  </div>
+</script>
+
+<% if @life_events %>
+  <%= content_for :footer do %>
+    <script>
+      $(() => {
+        _.templateSettings = {
+          interpolate: /\{\{=(.+?)\}\}/g,
+          evaluate: /\{\{(.+?)\}\}/g
+        };
+
+        const $years = $('a.year');
+        // noinspection JSAnnotator
+        const lifeEvents = <%= @life_events.to_json.to_s.html_safe %>;
+        const popoverTemplate = _.template($('#year-popover-template').html());
+        const yearOnHoverIn = function () {
+          const year = $(this).data('year');
+          const yearLifeEvents = lifeEvents[year];
+          if (yearLifeEvents.length > 0) {
+            const popoverContent = popoverTemplate({ lifeEvents: yearLifeEvents });
+            $(this).popover({
+              title: year,
+              content: popoverContent,
+              html: true,
+              placement: 'top',
+            }).popover('show');
+          }
+        };
+        const yearOnHoverOut = function () {
+          $(this).popover('hide');
+        };
+
+        $years.hover(yearOnHoverIn, yearOnHoverOut);
+      });
+    </script>
+  <% end %>
+<% end %>

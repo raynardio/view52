@@ -1,94 +1,27 @@
 <h1 class="text-center"><%= @view[:label] %></h1>
 
-<div class="accordion" id="view-accordion">
-  <div class="card">
-    <div class="card-header" id="long-goal-header" data-toggle="collapse" data-target="#long-goal-content">
-      <h5 class="mb-0">
-         <%= "#{t :long_term_goals} (#{@view[:long_term_goals].size})" %>
-      </h5>
-    </div>
-    <div id="long-goal-content" class="collapse" aria-labelledby="long-goal-header" data-parent="#view-accordion">
-      <div class="card-body">
-          <div class="row">
-            <% @view[:long_term_goals].each do |goal| %>
-              <div class="label label-info label-lg"><%= goal.text %></div>
-            <% end %>
-          </div>
+<div class="row">
+  <div class="col-md-8">
+    <div class="card">
+      <div class="card-heading border-bottom">
+        <h4 class="card-title">
+          <%= t :annual_summary %>
+        </h4>
+      </div>
+      <div class="card-block">
+        <%= render partial: 'shared/annual_view' %>
       </div>
     </div>
   </div>
-
-  <div class="card">
-    <div class="card-header" id="short-goal-header" data-toggle="collapse" data-target="#short-goal-content">
-      <h5 class="mb-0">
-        <%= "#{t :short_term_goals} (#{@view[:short_term_goals].size})" %>
-      </h5>
-    </div>
-    <div id="short-goal-content" class="collapse" aria-labelledby="short-goal-header" data-parent="#view-accordion">
-      <div class="card-body">
-        <div class="row">
-          <% @view[:short_term_goals].each do |goal| %>
-            <div class="label label-info label-lg"><%= goal.text %></div>
-          <% end %>
-        </div>
+  <div class="col-md-4">
+    <div class="card">
+      <div class="card-heading border-bottom">
+        <h4 class="card-title">
+          <%= t :resources %>
+        </h4>
       </div>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="card-header" id="notes-header" data-toggle="collapse" data-target="#notes-content">
-      <h5 class="mb-0">
-        <%= "#{t :notes} (#{@view[:notes].count})" %>
-      </h5>
-    </div>
-
-    <div id="notes-content" class="collapse" aria-labelledby="notes-header" data-parent="#view-accordion">
-      <div class="card-body">
-        <% @view[:notes].each do |note| %>
-          <div>
-            <a href="<%= url_for note %>"><%= note.title %></a>
-          </div>
-        <% end %>
-      </div>
-    </div>
-  </div>
-  
-  <div class="card">
-    <div class="card-header" id="web-link-header" data-toggle="collapse" data-target="#web-link-content">
-      <h5 class="mb-0">
-          <%= "#{t :links} (#{@view[:web_links].count})" %>
-      </h5>
-    </div>
-
-    <div id="web-link-content" class="collapse" aria-labelledby="web-link-header" data-parent="#view-accordion">
-      <div class="card-body">
-        <div class="row">
-          <% @view[:web_links].each do |link| %>
-            <span class="link-card">
-              <%= render partial: 'layouts/web_link_card', locals: { link: link } %>
-            </span>
-          <% end %>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="card-header" id="life-event-header" data-toggle="collapse" data-target="#life-event-content">
-      <h5 class="mb-0">
-        <%= "#{t :life_events} (#{@view[:life_events].count})" %>
-      </h5>
-    </div>
-
-    <div id="life-event-content" class="collapse" aria-labelledby="life-event-header" data-parent="#view-accordion">
-      <div class="card-body">
-        <div class="row">
-          <% @view[:life_events].each do |event| %>
-            <div>
-              <%= event.title %>
-            </div>
-          <% end %>
-        </div>
+      <div class="card-block">
+        <%= render partial: 'view/accordion' %>
       </div>
     </div>
   </div>

@@ -17,4 +17,8 @@ class LifeEvent < ApplicationRecord
   has_many :views, as: :item, dependent: :destroy
   has_many :tags, as: :item, dependent: :destroy
   has_many :web_links, as: :item, dependent: :destroy
+
+  def date_in_range?(date)
+    (self.from_date..self.to_date).include? date
+  end
 end
