@@ -1,0 +1,31 @@
+<ul id="role-category-sortable">
+  <%# RoleCategory.all.each do |role_category| %>
+  <% current_user.role_categories.sort_by(&:importance).reverse.map(&:role_category).each do |role_category| %>
+    <li data-label="<%= role_category.label %>">:: <%= role_category.short_name %></li>
+  <% end %>
+</ul>
+
+<%= content_for :footer do %>
+  <script>
+    $(() => {
+      const $roleCategory = $('#role-category-sortable');
+
+      $roleCategory.sortable();
+      $roleCategory.disableSelection();
+
+      $roleCategory.on('sortstop', () => {
+        const items = $.map($roleCategory.find('li'), i => $(i).data('label'));
+        console.log(items);
+
+        ajax({
+          url: '<%= role_sort_path %>',
+          method: 'POST',
+          dataType: 'json',
+          data: { role_categories: items },
+          success: console.log,
+          error: console.error
+        });
+      });
+    });
+  </script>
+<% end %>

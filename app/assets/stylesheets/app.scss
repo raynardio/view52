@@ -206,3 +206,19 @@ h1 {
     font-size: 12px;
   }
 }
+
+#role-category-sortable {
+  list-style-type: none;
+  cursor: grabbing;
+  margin: 0;
+  padding: 0;
+
+  li {
+    padding: 0.5em;
+    margin-top: 0.5em;
+    border: 1px solid lightgrey;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+  }
+}

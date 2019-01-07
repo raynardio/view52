@@ -52,3 +52,4 @@
 //= require @material/ripple/dist/mdc.ripple.min
 //= require tribute
 //= require underscore
+//= require jquery-ui/jquery-ui

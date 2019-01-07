@@ -52,9 +52,13 @@ class ProfileController < ApplicationController
       current_user.onboarded_at = Time.now
       current_user.save!
     end
-    current_user.update_attributes! update_params.merge({
-        date_of_birth: Date.strptime(update_params[:date_of_birth], '%m/%d/%Y')
-    })
+
+    if params.include? :date_of_birth
+      current_user.update_attributes! update_params.merge({
+          date_of_birth: Date.strptime(update_params[:date_of_birth], '%m/%d/%Y')
+      })
+    end
+
     render json: { msg: 'okay!' }
   end
 
