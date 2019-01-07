@@ -74,6 +74,8 @@ class User < ApplicationRecord
   validates :last_name, presence: true
   validates :encrypted_password, presence: true
 
+  after_create :create_role_categories!
+
   def present_roles
     roles.includes(:role).where(tense: :present).map &:role
   end
@@ -92,5 +94,11 @@ class User < ApplicationRecord
 
   def formatted_dob
     date_of_birth.strftime('%m/%d/%Y') rescue ''
+  end
+
+  def create_role_categories!
+    RoleCategory.order(label: :desc).each_with_index do |role_category,i|
+      self.role_categories.create! role_category_id: role_category.label, importance: i + 1
+    end
   end
 end
