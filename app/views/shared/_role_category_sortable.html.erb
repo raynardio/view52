@@ -1,7 +1,11 @@
 <ul id="role-category-sortable">
   <%# RoleCategory.all.each do |role_category| %>
-  <% current_user.role_categories.sort_by(&:importance).reverse.map(&:role_category).each do |role_category| %>
-    <li data-label="<%= role_category.label %>">:: <%= role_category.short_name %></li>
+  <% current_user.role_categories.order(importance: :desc).each do |role_category| %>
+    <li data-label="<%= role_category.label %>">
+      <span class="importance">
+        <%= role_category.importance %>
+      </span>
+      :: <%= role_category.short_name %></li>
   <% end %>
 </ul>
 
@@ -14,14 +18,18 @@
       $roleCategory.disableSelection();
 
       $roleCategory.on('sortstop', () => {
-        const items = $.map($roleCategory.find('li'), i => $(i).data('label'));
-        console.log(items);
+        const $items = $roleCategory.find('li');
+
+        let i = $items.length;
+        $items.each(function() {
+          $(this).find('.importance').text(`${i--}`);
+        });
 
         ajax({
           url: '<%= role_sort_path %>',
           method: 'POST',
           dataType: 'json',
-          data: { role_categories: items },
+          data: { role_categories: $.map($items, i => $(i).data('label')) },
           success: console.log,
           error: console.error
         });
