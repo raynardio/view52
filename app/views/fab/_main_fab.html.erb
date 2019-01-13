@@ -10,7 +10,7 @@
     <span class="fab-button">
       <button type="button" id="fab-goal" class="mdc-fab gps_fixed"
               data-toggle="tooltip" data-placement="top"
-              title="<%= t :goal %>" data-modal="goal" data-init="initGoalModal">
+              title="<%= t :goal %>" data-modal="goal" data-init="showGoalModal">
         <span class="mdc-fab__icon material-icons">gps_fixed</span>
       </button>
     </span>
@@ -48,7 +48,6 @@
 
         $button.click(() => {
           window[$button.data('init')]();
-          $(`#modal-${modal}`).modal('show');
         });
       });
     });

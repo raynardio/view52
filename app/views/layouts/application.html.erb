@@ -75,5 +75,39 @@
     <%= javascript_include_tag :app %>
     <%= javascript_include_tag params[:controller] rescue '' %>
     <%= yield :footer %>
+    <script>
+      $(() => {
+        $('a.edit-button').click(function() {
+          const $button = $(this);
+          const type = $button.data('type');
+          const id = $button.data('id');
+          let url;
+          let editFunction;
+
+          switch (type) {
+            case 'goal':
+              url = `<%= goal_index_path %>/${id}.json`;
+              editFunction = showGoalModal;
+              break;
+            default:
+              console.error(`Invalid type: ${type}`);
+              return false;
+          }
+
+          ajax({
+            url: url,
+            method: 'GET',
+            dataType: 'json',
+            success: data => {
+              console.log(`Data: ${JSON.stringify(data, null, 2)}`);
+              editFunction(data);
+            },
+            error: console.error
+          });
+
+          return false;
+        });
+      });
+    </script>
   </body>
 </html>

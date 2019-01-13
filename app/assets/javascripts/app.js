@@ -98,7 +98,16 @@ $(() => {
 		});
 	}
 
+	function templates() {
+    _.templateSettings = {
+      interpolate: /\{\{=(.+?)\}\}/g,
+      evaluate: /\{\{(.+?)\}\}/g,
+      escape: /\{\{-(.+?)\}\}/g
+    };
+  }
+
 	function init() {
+	    templates();
 	    sideNav();
 	    sideNavToggle();
 	    sidePanelToggle();

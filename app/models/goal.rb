@@ -27,6 +27,10 @@ class Goal < ApplicationRecord
   has_many :views, as: :item, dependent: :destroy
   has_many :tags, as: :item, dependent: :destroy
 
+  def formatted_date
+    self.goal_date.strftime '%m/%d/%Y'
+  end
+
   def to_s
     I18n.t("goal_description.#{term}", category: role_category_id.capitalize) + ': ' + text
   end

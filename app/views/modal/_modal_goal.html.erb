@@ -4,7 +4,7 @@
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title">
-            <%= t :new_goal %>
+            {{= goal.id ? '<%= t :edit_goal %>' : '<%= t :new_goal %>' }}
           </h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
@@ -12,7 +12,7 @@
         </div>
         <div class="modal-body">
           <div class="form-group">
-            <input name="title" type="text" class="form-control" placeholder="<%= t :goal %>...">
+            <input name="title" type="text" class="form-control" placeholder="<%= t :goal %>..." value="{{= goal.text || '' }}">
           </div>
           <div class="row">
             <div class="col-md">
@@ -29,7 +29,7 @@
             </div>
             <div class="col-md">
               <div class="form-group">
-                <input type="text" name="goal_date" class="form-control datepicker-orient-bottom" data-provide="datepicker" placeholder="📅 <%= t :goal_time_frame %>...">
+                <input type="text" name="goal_date" class="form-control datepicker-orient-bottom" data-provide="datepicker" placeholder="📅 <%= t :goal_time_frame %>..." value="{{= goal.goal_date || '' }}">
               </div>
             </div>
             <div class="col-md">
@@ -37,17 +37,19 @@
                 <select name="view" class="form-control selectize">
                   <option selected disabled data-placeholder="true"><%= t :select_view %>...</option>
                   <% RoleCategory.all.find_each do |role_category| %>
-                    <option value="<%= role_category.id %>"><%= role_category.short_name %></option>
+                    <option value="<%= role_category.id %>" {{= goal.view === '<%= role_category.id %>' ? 'selected' : '' }}><%= role_category.short_name %></option>
                   <% end %>
                 </select>
               </div>
             </div>
           </div>
           <div class="form-group">
-            <input class="selectize" type="text" name="tags">
+            <input class="selectize" type="text" name="tags" value="{{= goal.tags ? goal.tags.join(' ') : '' }}">
           </div>
           <div class="form-group">
-            <textarea class="form-control" name="description"></textarea>
+            <textarea class="form-control" name="description">
+              {{- goal.description ? goal.description : '' }}
+            </textarea>
           </div>
         </div>
         <div class="modal-footer">
@@ -62,14 +64,18 @@
 
 <%= content_for :footer do %>
   <script>
-    function initGoalModal() {
+    function showGoalModal(goal) {
       const $goalTemplate = $('#goal-template');
       const $goalModalContent = $('#goal-modal-content');
-      $goalModalContent.html($goalTemplate.html());
+
+      goal = goal || {};
+      $goalModalContent.html(_.template($goalTemplate.html())({ goal: goal }));
+      if (goal.term) {
+        $(`#modal-goal input[name=term][value=${goal.term}]`).click();
+      }
 
       const $goalModal = $('#modal-goal');
       const $goalTitle = $('#modal-goal input[name=title]');
-      // const $goalTerm = $('#modal-goal input[name=term]');
       const $goalDate = $('#modal-goal input[name=goal_date]');
       const $goalView = $('#modal-goal select[name=view]');
       const $goalTags = $('#modal-goal input[name=tags]');
@@ -123,17 +129,13 @@
           ['height', ['height']]]
       });
 
-      $goalModal.on('show.bs.modal', () => {
-        setTimeout(() => { $goalTitle.focus(); }, 500);
-      });
-
       $saveButton.click(function () {
         ajax({
-          url: '<%= goal_index_path %>',
-          method: 'POST',
+          url: `<%= goal_index_path %>${goal.id ? `/${goal.id}` : ''}`,
+          method: goal.id ? 'PUT' : 'POST',
           dataType: 'json',
           data: {
-            title: $goalTitle.val(),
+            text: $goalTitle.val(),
             term: $('#modal-goal input[name=term]:checked').val(),
             goal_date: $goalDate.val(),
             tags: $goalTags.val(),
@@ -149,6 +151,9 @@
           }
         });
       });
+
+      $goalModal.modal('show');
+      setTimeout(() => { $goalTitle.focus(); }, 500);
     }
   </script>
 <% end %>

@@ -58,11 +58,6 @@
   <%= content_for :footer do %>
     <script>
       $(() => {
-        _.templateSettings = {
-          interpolate: /\{\{=(.+?)\}\}/g,
-          evaluate: /\{\{(.+?)\}\}/g
-        };
-
         const $years = $('a.year');
         // noinspection JSAnnotator
         const lifeEvents = <%= @life_events.to_json.to_s.html_safe %>;
