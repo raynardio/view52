@@ -7,7 +7,6 @@
 <!--    </div>-->
     <% @annual_dates.each_with_index do |row, num| %>
       <div class="row">
-<!--        <span style="vertical-align: middle; display: table-cell"><%#= num + 1 %></span>-->
         <% row.each do |date| %>
           <a href="<%= url_for controller: :calendar, view: 'listYear', year: date.year %>" class="year col-md" data-year="<%= date.year %>">
             <% if @life_events && @life_events[date.year].present? %>
@@ -23,11 +22,13 @@
                 </div>
               <% end %>
             <% end %>
-            <% if @today.year == date.year %>
-              <div class="heading">
+            <%# if @today.year == date.year %>
+              <div class="heading <%= 'today' if @today.year == date.year %>">
                 <%= date.strftime '%Y' %> - Age
                 <%= date.year - current_user.date_of_birth.year %>
               </div>
+
+            <% if @today.year == date.year %>
               <div class="content">
                 <i class="ti-location-pin"></i>
                 <%= t :you_are_here %>

@@ -21,6 +21,10 @@ form {
     &:hover {
       background: $default-primary-alpha-11;
       cursor: pointer;
+
+      .heading {
+        display: inline;
+      }
     }
 
     margin: 0 0.2em 0.2em 0;
@@ -30,6 +34,16 @@ form {
 
     .heading {
       font-size: 0.8em;
+      color: darkgrey;
+      display: none;
+
+      &.today {
+        display: inline;
+      }
+
+      &:hover {
+        display: inline;
+      }
     }
 
     .content {
