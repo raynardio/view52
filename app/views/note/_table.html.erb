@@ -8,7 +8,7 @@
   <% notes.each do |note| %>
     <tr>
       <td>
-        <a href="<%= url_for note %>"><%= note.title %></a>
+        <a href="javascript:" class="note" data-id="<%= note.id %>"><%= note.title %></a>
       </td>
       <td>
         <%= note.views.map(&:short_name).join ', ' %>
@@ -22,3 +22,14 @@
     </tr>
   <% end %>
 </table>
+
+<% content_for :footer do %>
+  <script>
+    $(() => {
+      $('a.note').click(function() {
+          const id = $(this).data('id');
+          editNoteModal(id);
+      });
+    });
+  </script>
+<% end %>

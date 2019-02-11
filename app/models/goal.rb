@@ -23,7 +23,7 @@ class Goal < ApplicationRecord
   validates :user_id, presence: true
 
   belongs_to :user
-  # belongs_to :role_category
+  belongs_to :role_category, required: false
   has_many :views, as: :item, dependent: :destroy
   has_many :tags, as: :item, dependent: :destroy
 

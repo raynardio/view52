@@ -207,6 +207,13 @@ h1 {
   }
 }
 
+.modal-footer {
+  button.delete {
+    position: absolute;
+    left: 2em;
+  }
+}
+
 #role-category-sortable {
   list-style-type: none;
   cursor: grabbing;
@@ -221,4 +228,8 @@ h1 {
     -moz-border-radius: 5px;
     border-radius: 5px;
   }
+}
+
+#delete-note-modal {
+  z-index: 9999;
 }

@@ -53,3 +53,6 @@
 //= require tribute
 //= require underscore
 //= require jquery-ui/jquery-ui
+
+//= require ./app1
+//= require ./jquery.ui.touch-punch.min

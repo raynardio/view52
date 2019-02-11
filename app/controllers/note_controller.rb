@@ -44,21 +44,17 @@ class NoteController < ApplicationController
         label: params[:learning_type]
     })
 
-    # views.each do |view|
-    #   note.views.create!({
-    #     user_id: current_user.id,
-    #     label: view
-    #   })
-    # end
     render json: { error: false }
   end
 
   def update
+    p params
     note = current_user.notes.find params[:id]
     params.delete :id
 
     tags = params[:tags] && params[:tags].split || []
-    views = params[:views] && params[:views].split || []
+    views = [params[:primary_view], params[:secondary_view]]
+    learning_type = params[:learning_type]
 
     ActiveRecord::Base.transaction do
       note.tags.destroy_all
@@ -68,20 +64,36 @@ class NoteController < ApplicationController
         title: permitted_params[:title],
         note_type: permitted_params[:primary_note_type]
       })
+
+      note.learning_types.destroy_all
+      if learning_type
+        note.learning_types.create! label: learning_type, user_id: current_user.id
+      end
+
       tags.each do |tag|
         note.tags.create!({user_id: current_user.id, label: tag})
       end
 
       views.each do |view|
+        next if view.nil?
         note.views.create!({user_id: current_user.id, label: view})
       end
+
+      note.note_type = params[:note_type]
+      note.save!
     end
 
     render json: note
   end
 
+  def destroy
+    note = current_user.notes.find params[:id]
+    render json: { result: note.destroy }
+  end
+
   def show
-    @note = current_user.notes.find params[:id]
+    note = current_user.notes.find params[:id]
+    render partial: 'modal/modal_note', locals: { note: note }
   end
 
   private
