@@ -53,7 +53,7 @@ class ProfileController < ApplicationController
       current_user.save!
     end
 
-    if params.include? :date_of_birth
+    if update_params.include? :date_of_birth
       current_user.update_attributes! update_params.merge({
           date_of_birth: Date.strptime(update_params[:date_of_birth], '%m/%d/%Y')
       })
