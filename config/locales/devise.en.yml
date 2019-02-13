@@ -64,3 +64,5 @@ en:
         other: "%{count} errors prohibited this %{resource} from being saved:"
   Delete: "Delete"
   date_range: "Date Range"
+  prototype: "Prototype"
+  show_in_annual_view: "Show in Annual View"

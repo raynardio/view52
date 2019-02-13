@@ -56,6 +56,16 @@
             </div>
           </div>
           <div class="form-group">
+            <div>
+              <input type="checkbox" name="prototype" id="prototype-checkbox" <%= 'checked' if life_event.prototype? %>>
+              <label for="prototype-checkbox"><%= t(:prototype) %></label>
+            </div>
+            <div>
+              <input type="checkbox" name="show_in_annual_view" id="show-in-annual-view-checkbox" <%= 'checked' if life_event.show_in_annual_view? %>>
+              <label for="show-in-annual-view-checkbox"><%= t(:show_in_annual_view) %></label>
+            </div>
+          </div>
+          <div class="form-group">
             <textarea name="description" class="form-control">
               <%= life_event.description %>
             </textarea>
@@ -118,6 +128,8 @@
       const $toDate = $('#modal-life-event input[name=to_date]');
       const $view = $('#modal-life-event select[name=view]');
       const $secondaryView = $('#modal-life-event select[name=secondary_view]');
+      const $prototype = $('#modal-life-event input[name=prototype]');
+      const $showInAnnualView = $('#modal-life-event input[name=show_in_annual_view]');
       const $description = $('#modal-life-event textarea[name=description]');
       const $save = $('#modal-life-event button[name=save]');
       const $lifeEventDelete = $lifeEventModal.find('button.delete');
@@ -173,7 +185,9 @@
             view: $view.val(),
             secondary_view: $secondaryView.val(),
             description: $description.val(),
-            url: $url.val()
+            url: $url.val(),
+            prototype: $prototype.is(':checked'),
+            show_in_annual_view: $showInAnnualView.is(':checked')
           },
           success: event => {
             console.log(JSON.stringify(event));
