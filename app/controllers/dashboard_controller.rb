@@ -8,10 +8,14 @@ class DashboardController < ApplicationController
       @time_quote = Quote.random('time').text
       @today = Date.today
       @annual_dates = []
+      @life_events = {}
+      life_events = current_user.life_events.where(show_in_annual_view: true)
       (0..9).each do |x|
         @annual_dates << []
         (0..9).each do |y|
-          @annual_dates[x] << current_user.date_of_birth + ((x * 10) + y).years
+          date = current_user.date_of_birth + ((x * 10) + y).years
+          @annual_dates[x] << date
+          @life_events[date.year] = life_events.select { |e| e.date_in_range?(date) }
         end
       end
       @role_categories = current_user.role_categories.order(importance: :desc)
