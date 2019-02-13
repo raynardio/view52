@@ -22,11 +22,10 @@
                 </div>
               <% end %>
             <% end %>
-            <%# if @today.year == date.year %>
-              <div class="heading <%= 'today' if @today.year == date.year %>">
-                <%= date.strftime '%Y' %> - Age
-                <%= date.year - current_user.date_of_birth.year %>
-              </div>
+            <div class="heading <%= 'today' if @today.year == date.year %>">
+              <%= date.strftime '%Y' %> - Age
+              <%= date.year - current_user.date_of_birth.year %>
+            </div>
 
             <% if @today.year == date.year %>
               <div class="content">
