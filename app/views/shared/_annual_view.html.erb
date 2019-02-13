@@ -21,11 +21,12 @@
                   <img src="data:<%= link.favicon.content_type %>;base64, <%= link.favicon.base64 %>" />
                 </div>
               <% end %>
+            <% else %>
+              <div class="heading <%= 'today' if @today.year == date.year %>">
+                <%= date.strftime '%Y' %> - Age
+                <%= date.year - current_user.date_of_birth.year %>
+              </div>
             <% end %>
-            <div class="heading <%= 'today' if @today.year == date.year %>">
-              <%= date.strftime '%Y' %> - Age
-              <%= date.year - current_user.date_of_birth.year %>
-            </div>
 
             <% if @today.year == date.year %>
               <div class="content">

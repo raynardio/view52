@@ -181,8 +181,7 @@
             description: $goalDescription.val()
           },
           success: () => {
-            console.log('Yay!');
-            $goalModal.modal('hide');
+            location.reload();
           },
           error: err => {
             console.error(err);

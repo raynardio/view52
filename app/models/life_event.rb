@@ -21,6 +21,6 @@ class LifeEvent < ApplicationRecord
   has_many :web_links, as: :item, dependent: :destroy
 
   def date_in_range?(date)
-    (self.from_date..self.to_date).include? date
+    (self.from_date..(self.to_date || Date.today)).include? date
   end
 end

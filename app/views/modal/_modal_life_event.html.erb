@@ -190,8 +190,7 @@
             show_in_annual_view: $showInAnnualView.is(':checked')
           },
           success: event => {
-            console.log(JSON.stringify(event));
-            $lifeEventModal.modal('hide');
+            location.reload();
           },
           error: err => {
             console.error(err);

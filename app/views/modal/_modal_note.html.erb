@@ -180,8 +180,7 @@
             learning_type: $learningType.val()
           },
           success: () => {
-            $noteModal.modal('hide');
-            $noteModal.on('hidden.bs.modal', initNoteModal);
+            location.reload();
           },
           error: err => {
             console.error(`submit error: ${JSON.stringify(err)}`);
