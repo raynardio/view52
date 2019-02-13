@@ -27,4 +27,9 @@ class GoalController < ApplicationController
 
     render json: goal
   end
+
+  def show
+    goal = current_user.goals.find params[:id]
+    render partial: 'modal/modal_goal', locals: { goal: goal }
+  end
 end

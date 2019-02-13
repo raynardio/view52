@@ -3,7 +3,6 @@
   <th><%= t :title %></th>
   <th><%= t :views %></th>
   <th><%= t :tags %></th>
-  <!--    <th><%#= t :content %></th>-->
   </thead>
   <% notes.each do |note| %>
     <tr>
@@ -16,20 +15,6 @@
       <td>
         <%= note.tags.map(&:label).join ', ' %>
       </td>
-      <!--      <td>-->
-      <%#= note.text.html_safe %>
-      <!--      </td>-->
     </tr>
   <% end %>
 </table>
-
-<% content_for :footer do %>
-  <script>
-    $(() => {
-      $('a.note').click(function() {
-          const id = $(this).data('id');
-          editNoteModal(id);
-      });
-    });
-  </script>
-<% end %>

@@ -1,10 +1,12 @@
-<script type="template" id="note-template">
+<% new_note = !note.persisted? %>
+
+<script type="template" id="<%= new_note ? 'new-note-template' : 'note-template' %>">
   <div id="modal-note" class="modal fade" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title">
-            <%= t :new_note %>
+            <%= t(new_note ? :new_note : :edit_note) %>
           </h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
@@ -12,9 +14,6 @@
         </div>
         <div class="modal-body">
           <div class="form-group">
-<!--            <label for="note-title">-->
-              <%#= t :title %>
-<!--            </label>-->
             <input class="form-control" type="text" name="title" id="note-title" placeholder="<%= t :title %>..." value="<%= note.title %>">
           </div>
           <div class="row">
@@ -84,9 +83,11 @@
           </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-danger delete">
-            <%= t :Delete %>
-          </button>
+          <% unless new_note %>
+            <button type="button" class="btn btn-danger delete">
+              <%= t :Delete %>
+            </button>
+          <% end %>
           <button type="button" class="btn btn-secondary" data-dismiss="modal">
             <%= t :close %>
           </button>
@@ -124,7 +125,7 @@
 <%#= content_for :footer do %>
   <script>
     function initNoteModal(id) {
-      const $noteTemplate = $('#note-template');
+      const $noteTemplate = $(id ? '#note-template' : '#new-note-template');
       const $noteModalContent = $('#note-modal-content');
       $noteModalContent.html($noteTemplate.html());
 

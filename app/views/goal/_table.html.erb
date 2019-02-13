@@ -1,0 +1,20 @@
+<table class="table table-striped">
+  <thead>
+  <th><%= t :goal %></th>
+  <th><%= t :view %></th>
+  <th><%= t :tags %></th>
+  </thead>
+  <% goals.each do |goal| %>
+    <tr>
+      <td>
+        <a href="javascript:" class="goal" data-id="<%= goal.id %>"><%= goal.text %></a>
+      </td>
+      <td>
+        <%= goal.views.map(&:short_name).join ', ' %>
+      </td>
+      <td>
+        <%= goal.tags.map(&:label).join ', ' %>
+      </td>
+    </tr>
+  <% end %>
+</table>

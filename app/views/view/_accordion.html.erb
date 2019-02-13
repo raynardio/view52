@@ -25,9 +25,10 @@
     <div id="short-goal-content" class="collapse" aria-labelledby="short-goal-header" data-parent="#view-accordion">
       <div class="card-body">
         <div class="row">
-          <% @view[:short_term_goals].each do |goal| %>
-            <div class="label label-info label-lg"><%= goal.text %></div>
-          <% end %>
+          <%= render partial: 'goal/table', locals: { goals: @view[:short_term_goals] } %>
+          <%# @view[:short_term_goals].each do |goal| %>
+<!--            <div class="label label-info label-lg"><%#= goal.text %></div>-->
+          <%# end %>
         </div>
       </div>
     </div>
