@@ -2,8 +2,8 @@
   <thead>
     <tr>
       <th><%= t :title %></th>
+      <th><%= t :date_range %></th>
       <th><%= t :views %></th>
-      <th><%= t :tags %></th>
     </tr>
   </thead>
   <% life_events.each do |life_event| %>
@@ -12,10 +12,11 @@
         <a href="javascript:" class="life-event" data-id="<%= life_event.id %>"><%= life_event.title %></a>
       </td>
       <td>
-        <%= life_event.views.map(&:short_name).join ', ' %>
+        <%= life_event.from_date.strftime '%m/%d/%Y' %> -
+        <%= life_event.to_date.strftime '%m/%d/%Y' %>
       </td>
       <td>
-        <%= life_event.tags.map(&:label).join ', ' %>
+        <%= life_event.views.map(&:short_name).join ', ' %>
       </td>
     </tr>
   <% end %>
