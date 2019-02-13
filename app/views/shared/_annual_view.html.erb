@@ -49,7 +49,7 @@
     <strong><%= t :life_events %></strong>
     <ul>
     {{ _.each(lifeEvents, lifeEvent => { }}
-      <li>{{= lifeEvent.title }}</li>
+      <li><a class="life-event" href="javascript:editLifeEventModal({{= lifeEvent.id}})">{{= lifeEvent.title }}</a></li>
     {{ }); }}
     </ul>
   </div>
@@ -72,13 +72,20 @@
           const year = $(this).data('year');
           const yearLifeEvents = lifeEvents[year];
           if (yearLifeEvents.length > 0) {
-            const popoverContent = popoverTemplate({ lifeEvents: yearLifeEvents });
-            $(this).popover({
+            const $popoverContent = $(popoverTemplate({ lifeEvents: yearLifeEvents }));
+            const showPopover = () => $(this).popover({
               title: year,
-              content: popoverContent,
+              content: $popoverContent,
               html: true,
               placement: 'top',
+              trigger: 'focus'
             }).popover('show');
+
+            let popover = showPopover();
+
+            $popoverContent.hover(() => {
+              popover = showPopover();
+            }, () => popover.popover('hide'));
           }
         };
         const yearOnHoverOut = function () {
