@@ -19,12 +19,12 @@
           <div class="row">
             <div class="col-md">
               <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                <label class="btn btn-secondary active">
-                  <input type="radio" name="term" value="short" autocomplete="off" <%= 'checked' if goal.term == 'short' || new_goal %>>
+                <label class="btn btn-secondary <%= 'active' if (goal.term == 'short' || new_goal) %>">
+                  <input type="radio" name="term" value="short" autocomplete="off" <%= 'checked' if (goal.term == 'short' || new_goal) %>>
                   <%= t :short_term %>
                 </label>
-                <label class="btn btn-secondary">
-                  <input type="radio" name="term" autocomplete="off" value="long" <%= 'checked' if goal.term == 'long'%>>
+                <label class="btn btn-secondary <%= 'active' if goal.term == 'long' %>">
+                  <input type="radio" name="term" autocomplete="off" value="long" <%= 'checked' if goal.term == 'long' %>>
                   <%= t :long_term %>
                 </label>
               </div>
