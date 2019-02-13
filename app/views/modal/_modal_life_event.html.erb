@@ -1,10 +1,12 @@
-<script type="template" id="life-event-modal-template">
+<% new_event = !life_event.persisted? %>
+
+<script type="template" id="<%= new_event ? 'new-life-event-modal-template' : 'life-event-modal-template' %>">
   <div id="modal-life-event" class="modal fade" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title">
-            <%= t :new_life_event %>
+            <%= t(new_event ? :new_life_event : :edit_life_event) %>
           </h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
@@ -12,48 +14,59 @@
         </div>
         <div class="modal-body">
           <div class="form-group">
-            <input type="text" name="title" class="form-control" placeholder="<%= t :life_event %>...">
+            <input type="text" name="title" class="form-control" placeholder="<%= t :life_event %>..." value="<%= life_event.title %>">
           </div>
           <div class="form-group">
-            <input type="text" name="url" class="form-control" placeholder="<%= t :url %>...">
+            <% url = life_event.web_links.first&.url %>
+            <input type="text" name="url" class="form-control" placeholder="<%= t :url %>..." value="<%= url %>">
           </div>
           <div class="row">
             <div class="col-md">
               <div class="form-group">
-                <input type="text" name="from_date" class="form-control datepicker-orient-bottom" data-provide="datepicker" placeholder="<%= t :from %>...">
+                <input type="text" name="from_date" class="form-control datepicker-orient-bottom" data-provide="datepicker" placeholder="<%= t :from %>..." value="<%= life_event.from_date&.strftime('%m/%d/%Y') %>">
               </div>
             </div>
             <div class="col-md">
               <div class="form-group">
-                <input type="text" name="to_date" class="form-control datepicker-orient-bottom" data-provide="datepicker" placeholder="<%= t :to %>...">
+                <input type="text" name="to_date" class="form-control datepicker-orient-bottom" data-provide="datepicker" placeholder="<%= t :to %>..." value="<%= life_event.to_date&.strftime('%m/%d/%Y') %>">
               </div>
             </div>
             <div class="col-md">
               <div class="form-group">
+                <% views = life_event.views.all.order(:created_at) %>
+                <% primary_view = views[0] %>
                 <select name="view" class="form-control">
                   <option selected disabled data-placeholder="true"><%= t :view %>...</option>
                   <% RoleCategory.all.find_each do |role_category| %>
-                    <option value="<%= role_category.id %>"><%= role_category.short_name %></option>
+                    <option value="<%= role_category.id %>" <%= 'selected' if primary_view&.label == role_category.id %>><%= role_category.short_name %></option>
                   <% end %>
                 </select>
               </div>
             </div>
             <div class="col-md">
               <div class="form-group">
+                <% secondary_view = views[1] %>
                 <select name="secondary_view" class="form-control">
                   <option selected disabled data-placeholder="true"><%= t :secondary_view %>...</option>
                   <% RoleCategory.all.find_each do |role_category| %>
-                    <option value="<%= role_category.id %>"><%= role_category.short_name %></option>
+                    <option value="<%= role_category.id %>" <%= 'selected' if secondary_view&.label == role_category.id %>><%= role_category.short_name %></option>
                   <% end %>
                 </select>
               </div>
             </div>
           </div>
           <div class="form-group">
-            <textarea name="description" class="form-control"></textarea>
+            <textarea name="description" class="form-control">
+              <%= life_event.description %>
+            </textarea>
           </div>
         </div>
         <div class="modal-footer">
+          <% unless new_event %>
+            <button type="button" class="btn btn-danger delete">
+              <%= t :Delete %>
+            </button>
+          <% end %>
           <button type="button" class="btn btn-secondary" data-dismiss="modal">
             <%= t :close %>
           </button>
@@ -64,17 +77,37 @@
   </div>
 </script>
 
+<div id="delete-life-event-modal" class="modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Delete Note</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div><strong>Are you sure you want to delete this life event?</strong></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+        <button type="button" class="btn btn-danger confirm">Yes, Delete</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div id="life-event-modal-content"></div>
 
-<%= content_for :footer do %>
+<%#= content_for :footer do %>
   <script>
-    function initLifeEventModal() {
+    function initLifeEventModal(id) {
       const calendarOptions = {
         header: { center: 'month,year' },
         views: { month: { titleFormat: 'MM/DD/YYYY' } }
       };
 
-      const $lifeEventModalTemplate = $('#life-event-modal-template');
+      const $lifeEventModalTemplate = $(id ? '#life-event-modal-template' : '#new-life-event-modal-template');
       const $lifeEventContent = $('#life-event-modal-content');
       $lifeEventContent.html($lifeEventModalTemplate.html());
 
@@ -87,6 +120,8 @@
       const $secondaryView = $('#modal-life-event select[name=secondary_view]');
       const $description = $('#modal-life-event textarea[name=description]');
       const $save = $('#modal-life-event button[name=save]');
+      const $lifeEventDelete = $lifeEventModal.find('button.delete');
+      const $deleteModal = $('#delete-life-event-modal');
 
       $fromDate.fullCalendar(calendarOptions);
       $toDate.fullCalendar(calendarOptions);
@@ -106,11 +141,30 @@
       //   setTimeout(() => { $title.focus(); }, 500);
       // });
 
+      id = id || '';
+      const url = `<%= life_event_index_path %>/${id}`;
+      const method = id ? 'PUT' : 'POST';
+
+      $lifeEventDelete.click(function() {
+        $deleteModal.modal('show');
+        $deleteModal.find('button.confirm').click(() => {
+          ajax({
+            url: url,
+            method: 'DELETE',
+            success: data => {
+              console.log(data);
+              location.reload();
+            },
+            error: alert
+          });
+        });
+      });
+
       $save.click(function() {
         $save.attr('disabled', true);
         ajax({
-          url: '<%= life_event_index_url %>',
-          method: 'POST',
+          url: url,
+          method: method,
           dataType: 'json',
           data: {
             title: $title.val(),
@@ -133,4 +187,4 @@
       });
     }
   </script>
-<% end %>
+<%# end %>

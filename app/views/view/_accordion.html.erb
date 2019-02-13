@@ -77,11 +77,12 @@
 
     <div id="life-event-content" class="collapse" aria-labelledby="life-event-header" data-parent="#view-accordion">
       <div class="card-body">
-        <% @view[:life_events].each do |event| %>
-          <div>
-            <%= event.title %>
-          </div>
-        <% end %>
+        <%= render partial: 'life_event/table', locals: { life_events: @view[:life_events] } %>
+        <%# @view[:life_events].each do |event| %>
+<!--          <div>-->
+            <%#= event.title %>
+<!--          </div>-->
+        <%# end %>
       </div>
     </div>
   </div>

@@ -1,8 +1,9 @@
 <div id="modals">
   <%= render partial: 'modal/modal_goal', locals: { goal: Goal.new } %>
-  <%= render partial: 'modal/modal_life_event' %>
+  <%= render partial: 'modal/modal_life_event', locals: { life_event: LifeEvent.new } %>
   <%= render partial: 'modal/modal_note', locals: { note: Note.new } %>
   <%= render 'modal/modal_web_link' %>
   <div id="modal-goal-edit"></div>
+  <div id="modal-life-event-edit"></div>
   <div id="modal-note-edit"></div>
 </div>

@@ -1,0 +1,22 @@
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th><%= t :title %></th>
+      <th><%= t :views %></th>
+      <th><%= t :tags %></th>
+    </tr>
+  </thead>
+  <% life_events.each do |life_event| %>
+    <tr>
+      <td>
+        <a href="javascript:" class="life-event" data-id="<%= life_event.id %>"><%= life_event.title %></a>
+      </td>
+      <td>
+        <%= life_event.views.map(&:short_name).join ', ' %>
+      </td>
+      <td>
+        <%= life_event.tags.map(&:label).join ', ' %>
+      </td>
+    </tr>
+  <% end %>
+</table>

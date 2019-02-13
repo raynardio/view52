@@ -29,4 +29,14 @@ class LifeEventController < ApplicationController
 
     render json: event
   end
+
+  def show
+    life_event = current_user.life_events.find params[:id]
+    render partial: 'modal/modal_life_event', locals: { life_event: life_event }
+  end
+
+  def destroy
+    life_event = current_user.life_events.find params[:id]
+    render json: { result: life_event.destroy }
+  end
 end
